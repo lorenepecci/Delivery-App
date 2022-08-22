@@ -3,6 +3,6 @@ require('express-async-errors');
 
 const app = express();
 
-app.get('/coffee', (_req, res) => res.status(418).end());
+app.use(require('./routes'));
 
 module.exports = app;
