@@ -1,22 +1,26 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
 const productsService = require('../../api/services/products.service');
-
-const res = {};
+const productsController = require('../../api/controllers/products.controller');
 
 describe('Product Controller', () => {
+  const response = {};
+  const request = {};
+
   before(() => {
-    sinon.stub(productsService, 'findAll').resolves([]);
+    sinon.stub(productsService, 'findAll').returns([]);
 
-    res.status = sinon.stub(res);
-    res.json = sinon.stub(res);
-
-    expect(res.status).to.have.been.call(200);
-    expect(res.json).to.be.an('array');
+    response.status = sinon.stub().returns(response);
+    response.json = sinon.stub().returns({});
   });
 
   after(() => {
     sinon.restore();
   });
-  it('should return an list of products', () => {});
+
+  it('should return all products', async () => {
+    await productsController.findAll(request, response);
+
+    expect(response.status.calledWith(200)).to.be.true;
+  });
 });
