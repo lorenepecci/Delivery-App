@@ -74,7 +74,7 @@ const mock = [
 
 describe('Product Service', () => {
   before(() => {
-    sinon.stub(Product, 'findAll').returns(mock);
+    sinon.stub(Product, 'findAll').resolves(mock);
   });
 
   after(() => {
