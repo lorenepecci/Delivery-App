@@ -1,0 +1,50 @@
+.form-login {
+  background-color: rgb(226, 231, 227);
+  border: auto;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 2rem;
+  text-align: center;
+  width: 200px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+}
+
+p {
+  color: black;
+  margin: 0;
+  padding-left: 1rem;
+}
+
+input {
+  border: 1px solid black;
+  border-radius: 3px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.btn-login {
+  background-color: rgb(6, 131, 93);
+  border: 1px solid black;
+  border-radius: 7px;
+  color: white;
+  margin: 5px;
+  padding: 10px;
+}
+
+.btn-register {
+  background-color: transparent;
+  border: 1px solid rgb(6, 131, 93);
+  border-radius: 7px;
+  color: rgb(6, 131, 93);
+  margin: 5px;
+  padding: 10px;
+}
+
