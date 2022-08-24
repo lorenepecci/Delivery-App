@@ -1,3 +1,4 @@
+const md5 = require('md5');
 const UsersSchema = (sequelize, DataTypes) => {
   const UsersTable = sequelize.define("User", {
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -9,6 +10,14 @@ const UsersSchema = (sequelize, DataTypes) => {
     timestamps: false,
     underscored: true,
     tableName: 'Users',
+    hooks: {
+      beforeCreate: async (user) => {
+        if (user.password) user.password = md5(user.password);
+      },
+      beforeUpdate: async (user) => {
+        if (user.password) user.password = md5(user.password);
+      }
+    }
   })
 
   UsersTable.associate = (models) => {
