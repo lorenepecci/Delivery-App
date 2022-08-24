@@ -1,0 +1,5 @@
+.products-navbar {
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+}
