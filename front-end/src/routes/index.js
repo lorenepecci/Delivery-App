@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Login from '../components/Login';
+import Login from '../pages/Login';
 
 function Routes() {
   return (
@@ -8,6 +8,8 @@ function Routes() {
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route exact path="/login" component={ Login } />
+        <Route exact path="/register" component={ Login } />
+        <Route exact path="/customer/products" component={ Login } />
       </Switch>
     </BrowserRouter>
   );
