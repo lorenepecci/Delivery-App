@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { postLogin } from '../../services/api';
 import './Login.css';
 
 export default function Login() {
@@ -10,14 +11,20 @@ export default function Login() {
     password: '',
   });
 
-  const validadeForm = () => {
-    const { email, password } = user;
-    const emailRegex = /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/i;
-    const minPasswordLenght = 6;
-    if (emailRegex.test(email) && password.length > minPasswordLenght) {
-      setIsDisabled(false);
-    }
-  };
+  useEffect(() => {
+    const validadeForm = () => {
+      const { email, password } = user;
+      const emailRegex = /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/i;
+      const minPasswordLenght = 5;
+      if (emailRegex.test(email)
+        && password.length > minPasswordLenght) {
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+    };
+    validadeForm();
+  }, [setUser, user]);
 
   const handleChange = ({ target }) => {
     const { id, value } = target;
@@ -25,11 +32,20 @@ export default function Login() {
       ...prevState,
       [id]: value,
     }));
-    validadeForm();
   };
-  const onHandleSubmit = async () => history.push('/customer/products');
+  const onHandleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log('try');
+      const response = await postLogin(user);
+      localStorage.setItem('user', JSON.stringify(response));
+      // history.push('/login');
+    } catch (error) {
+      console.log(error, 'login erro');
+    }
+  };
 
-  const onHandleSubmitRegister = async () => history.push('/resgister');
+  const onHandleSubmitRegister = async () => history.push('/register');
 
   return (
     <form className="form-login">
@@ -59,10 +75,10 @@ export default function Login() {
         className="btn-login"
         data-testid="btn-login"
         type="button"
-        onClick={ () => onHandleSubmit() }
+        onClick={ (e) => onHandleSubmit(e) }
         disabled={ isDisabled }
       >
-        Login
+        LOGIN
 
       </button>
 
@@ -71,7 +87,6 @@ export default function Login() {
         data-testid="btn-register"
         type="button"
         onClick={ () => onHandleSubmitRegister() }
-        disabled={ isDisabled }
       >
         Ainda não tenho conta
 
