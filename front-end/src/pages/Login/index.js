@@ -6,6 +6,7 @@ import './Login.css';
 export default function Login() {
   const history = useHistory();
   const [isDisabled, setIsDisabled] = useState(true);
+  const [error, setError] = useState(false);
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -38,10 +39,11 @@ export default function Login() {
     try {
       console.log('try');
       const response = await postLogin(user);
-      localStorage.setItem('user', JSON.stringify(response));
-      // history.push('/login');
-    } catch (error) {
-      console.log(error, 'login erro');
+      localStorage.setItem('user', JSON.stringify(response.data));
+      history.push('/customer/products');
+    } catch (erro) {
+      setError(true);
+      console.log(erro, 'login erro');
     }
   };
 
@@ -52,7 +54,7 @@ export default function Login() {
       <label htmlFor="email">
         <p>Login:</p>
         <input
-          data-testid="input-email"
+          data-testid="common_login__input-email"
           id="email"
           type="text"
           value={ user.email }
@@ -63,7 +65,7 @@ export default function Login() {
       <label htmlFor="password">
         <p>Senha:</p>
         <input
-          data-testid="input-password"
+          data-testid="common_login__input-password"
           id="password"
           type="text"
           value={ user.password }
@@ -73,7 +75,7 @@ export default function Login() {
       </label>
       <button
         className="btn-login"
-        data-testid="btn-login"
+        data-testid="common_login__button-login"
         type="button"
         onClick={ (e) => onHandleSubmit(e) }
         disabled={ isDisabled }
@@ -84,13 +86,18 @@ export default function Login() {
 
       <button
         className="btn-register"
-        data-testid="btn-register"
+        data-testid="common_login__button-register"
         type="button"
         onClick={ () => onHandleSubmitRegister() }
       >
         Ainda não tenho conta
 
       </button>
+      { error ? (
+        <span data-testid="common_login__element-invalid-email">
+          Error
+        </span>) : null }
+
     </form>
   );
 }
