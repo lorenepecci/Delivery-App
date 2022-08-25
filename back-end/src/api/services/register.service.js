@@ -2,8 +2,9 @@ const { User } = require('../../database/models');
 const HttpException = require('../utils/HttpException');
 const { generateJWTToken } = require('../utils/JWTToken');
 
-const createUser = async ({ name, email, password, role }) => {
+const createUser = async ({ name, email, password }) => {
   let newUser;
+  const role = 'customer';
   try {
     newUser = await User.create({ name, email, password, role });
   } catch (error) {
