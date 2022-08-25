@@ -7,7 +7,6 @@ const ProductsSchema = (sequelize, DataTypes) => {
   }, { 
     timestamps: false,
     underscored: true,
-    tableName: 'Products'
   })
   
   return ProductsTable;
