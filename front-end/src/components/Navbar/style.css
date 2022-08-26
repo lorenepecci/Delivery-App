@@ -1,8 +1,4 @@
-/* .products-header {
-  margin: 0;
-} */
-
-.products-navbar {
+.navbar {
   align-items: center;
   display: flex;
   justify-content: space-evenly;

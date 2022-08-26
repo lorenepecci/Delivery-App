@@ -12,8 +12,8 @@ export default function Navbar() {
   const { data } = user;
 
   return (
-    <header className="products-header">
-      <nav className="products-navbar">
+    <header>
+      <nav className="navbar">
         <button
           type="button"
           onClick={ () => history.push('/customer/products') }
