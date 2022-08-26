@@ -10,11 +10,19 @@ module.exports = {
       },
       user_id: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id'
+        },
       },
       seller_id: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id'
+        },
       },
       total_price: {
         allowNull: false,
@@ -31,6 +39,9 @@ module.exports = {
       sale_date: {
         type: Sequelize.DATE
       },
+      status: {
+        type: Sequelize.STRING
+      }
     });
   },
   down: async (queryInterface, Sequelize) => {
