@@ -58,33 +58,10 @@ function ProductCard({ product }) {
         }
         return item;
       });
-/*       const updatedCart = cart.reduce((acc, item) => {
-        if (item.qnt > 0) {
-          acc.push({ ...item, qnt: findProduct.qnt });
-          return acc;
-        }
-      }, []); */
       localStorage.setItem('buyList', JSON.stringify(updatedCart));
-    }
-    /* if (!findProduct) {
-      product.qnt = value;
-      setProductQnt(value);
-      cart.push(product);
-      localStorage.setItem('buyList', JSON.stringify(cart));
-    } else {
-      findProduct.qnt = value;
-      setProductQnt(findProduct.qnt);
-      const updatedCart = cart.map((item) => {
-        if (item.id === product.id) {
-          return { ...item, qnt: findProduct.qnt };
-        }
-        return item;
-      });
-      localStorage.setItem('buyList', JSON.stringify(updatedCart));
-    } */
+    }   
   };
 
-  // const { product } = this.props;
   return (
     <section>
       <div>{ product.price }</div>
