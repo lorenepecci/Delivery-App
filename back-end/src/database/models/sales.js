@@ -1,13 +1,33 @@
 const SalesSchema = (sequelize, DataTypes) =>{
   const SalesTable = sequelize.define("Sale", {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    user_id: DataTypes.INTEGER,
-    seller_id: DataTypes.INTEGER,
-    total_price: DataTypes.DECIMAL(9, 2),
-    delivery_adress: DataTypes.STRING,
-    delivery_number: DataTypes.STRING,
-    sale_date: DataTypes.DATE,
-    status: DataTypes.STRING
+    id: { 
+      type: DataTypes.INTEGER, 
+      primaryKey: true, 
+      autoIncrement: true 
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      foreignKey: true
+    }, 
+    sellerId: {
+      type: DataTypes.INTEGER,
+      foreignKey: true
+    }, 
+    totalPrice: DataTypes.DECIMAL(9, 2),
+    deliveryAddress: DataTypes.STRING,
+    deliveryNumber: DataTypes.STRING,
+
+    //  TO DO: Verificar formato da data
+    saleDate: {
+      type: DataTypes.DATE,
+      defaultValue: Date.now()
+    },
+
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: 'Pendente'
+    }, 
+
   }, {
     timestamps: false,
     underscored: true,
@@ -15,6 +35,10 @@ const SalesSchema = (sequelize, DataTypes) =>{
 
   SalesTable.associate = (models) => {
     SalesTable.belongsTo(models.User, { foreignKey: "userId", as: "user" });
+  }
+
+  SalesTable.associate = (models) => {
+    SalesTable.belongsTo(models.User, { foreignKey: "sellerId", as: "seller" });
   }
 
   return SalesTable;
