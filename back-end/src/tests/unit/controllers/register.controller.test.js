@@ -1,8 +1,8 @@
 const sinon = require('sinon');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const registerService = require('../../api/services/register.service');
-const app = require('../../api/app');
+const registerService = require('../../../api/services/register.service');
+const app = require('../../../api/app');
 
 const { expect } = chai;
 chai.use(chaiHttp);
