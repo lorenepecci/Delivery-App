@@ -5,8 +5,8 @@ const registerService = require('../services/register.service');
 const adminRouter = Router();
 
 adminRouter.post('/', authValidation, adminValidation, async (req, res) => {
-  const response = await registerService.createUser(req.body);
-  return res.status(201).json(response);
+  await registerService.createUser(req.body);
+  return res.status(201).json({ success: true });
 });
 
 module.exports = adminRouter;
