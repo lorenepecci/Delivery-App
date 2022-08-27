@@ -20,4 +20,20 @@ const create = async (saleData, userId) => {
   })));
 };
 
-module.exports = { create };
+const getBySeller = async (sellerId) => {
+  const sales = await Sale.findAll({ where: { sellerId } });
+
+  return sales;
+};
+
+const getByUser = async (userId) => {
+  const sales = await Sale.findAll({ where: { userId } });
+
+  return sales;
+};
+
+module.exports = { 
+  create,
+  getBySeller,
+  getByUser,
+};
