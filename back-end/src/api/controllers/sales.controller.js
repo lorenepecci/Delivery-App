@@ -12,4 +12,12 @@ saleRoute.post('/customer/checkout', authenticationMiddleware, async (req, res) 
   return res.status(200).end();
 });
 
+saleRoute.get('/customer/orders', authenticationMiddleware, async (req, res) => {
+  const { id } = res.locals.payload;
+
+  const sales = await salesService.getByUser(id);
+
+  return res.status(200).json(sales);
+});
+
 module.exports = saleRoute;
