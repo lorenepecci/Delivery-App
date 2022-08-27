@@ -4,7 +4,7 @@ const authenticationMiddleware = require('../middlewares/authValidation');
 
 const saleRoute = Router();
 
-saleRoute.post('/', authenticationMiddleware, async (req, res) => {
+saleRoute.post('/customer/checkout', authenticationMiddleware, async (req, res) => {
   const { id } = res.locals.payload;
 
   await salesService.create(req.body, id);
