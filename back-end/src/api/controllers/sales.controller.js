@@ -8,7 +8,7 @@ saleRoute.post('/customer/checkout', authenticationMiddleware, async (req, res) 
   const { id } = res.locals.payload;
   await salesService.create(req.body, id);
   
-  return res.status(200).end();
+  return res.status(200).json({ success: true });
 });
 
 saleRoute.get('/customer/orders', authenticationMiddleware, async (req, res) => {
