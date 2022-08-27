@@ -2,7 +2,6 @@ const { Sale } = require('../../database/models');
 const { SalesProduct } = require('../../database/models');
 
 const create = async (saleData, userId) => {
-  console.log(userId);
   const { totalPrice, deliveryAddress, deliveryNumber, sellerId, products } = saleData;
 
   const createdSale = await Sale.create({
@@ -22,13 +21,11 @@ const create = async (saleData, userId) => {
 
 const getBySeller = async (sellerId) => {
   const sales = await Sale.findAll({ where: { sellerId } });
-
   return sales;
 };
 
 const getByUser = async (userId) => {
   const sales = await Sale.findAll({ where: { userId } });
-
   return sales;
 };
 
