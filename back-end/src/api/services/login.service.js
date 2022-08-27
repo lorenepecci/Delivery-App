@@ -15,7 +15,7 @@ const login = async ({ email, password }) => {
     throw new HttpException(401, 'Wrong credentials');
   } 
 
-  const token = generateJWTToken({ email, name, role, password });
+  const token = generateJWTToken({ email, name, role, id: user.id });
 
   return { name, email, role, token };
 };
