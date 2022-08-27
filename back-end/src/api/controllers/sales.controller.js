@@ -20,4 +20,12 @@ saleRoute.get('/customer/orders', authenticationMiddleware, async (req, res) => 
   return res.status(200).json(sales);
 });
 
+saleRoute.get('/seller/orders', authenticationMiddleware, async (req, res) => {
+  const { id } = res.locals.payload;
+
+  const sales = await salesService.getBySeller(id);
+
+  return res.status(200).json(sales);
+});
+
 module.exports = saleRoute;
