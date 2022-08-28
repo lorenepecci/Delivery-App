@@ -9,6 +9,7 @@ const UsersSchema = (sequelize, DataTypes) => {
   }, {
     timestamps: false,
     underscored: true,
+    tableName: 'users',
     hooks: {
       beforeCreate: async (user) => {
         if (user.password) user.password = md5(user.password);

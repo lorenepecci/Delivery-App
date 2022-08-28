@@ -41,13 +41,12 @@ export default function Register() {
   const onHandleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('try');
       const response = await postRegister(user);
-      console.log(response, 'response');
+      if (!response) throw Error;
       history.push('/customer/products');
-    } catch (er) {
+    } catch (err) {
       setError(true);
-      console.log(er, 'regist erro');
+      console.log('register error', err);
     }
   };
 
