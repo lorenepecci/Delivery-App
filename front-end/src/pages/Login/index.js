@@ -37,13 +37,13 @@ export default function Login() {
   const onHandleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('try');
       const response = await postLogin(user);
-      localStorage.setItem('user', JSON.stringify(response.data));
+      if (!response) throw Error;
+      localStorage.setItem('user', JSON.stringify(response));
       history.push('/customer/products');
-    } catch (erro) {
+    } catch (err) {
       setError(true);
-      console.log(erro, 'login erro');
+      console.log('login error', err);
     }
   };
 

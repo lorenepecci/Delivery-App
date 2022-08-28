@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const HttpException = require('./HttpException');
 
-const SECRET = process.env.JWT_SECRET;
+const SECRET = process.env.JWT_SECRET || 'secret';
 // https://datatracker.ietf.org/doc/html/rfc7519#section-4.1
 const jwtConfig = {
   // expiresIn: '15m',
