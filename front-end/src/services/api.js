@@ -4,6 +4,10 @@ const instance = axios.create({
   baseURL: 'http://localhost:3001',
 });
 
+/* const postCheckout = async ( body ) => {
+  const {address, number, seller}
+} */
+
 const postRegister = async (body) => {
   const { name, email, password } = body;
   try {

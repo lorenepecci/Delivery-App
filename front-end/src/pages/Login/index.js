@@ -37,7 +37,6 @@ export default function Login() {
   const onHandleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('try');
       const response = await postLogin(user);
       localStorage.setItem('user', JSON.stringify(response.data));
       history.push('/customer/products');
