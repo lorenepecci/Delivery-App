@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: `http://${process.env.REACT_APP_HOSTNAME}:${process.env.REACT_APP_BACKEND_PORT}`,
+  baseURL: 'http://localhost:3001',
 });
 
-// baseURL: 'http://localhost:3001',
+// baseURL: `http://${process.env.REACT_APP_HOSTNAME}:${process.env.REACT_APP_BACKEND_PORT}`,
 
 const postRegister = async (body) => {
   const { name, email, password } = body;
