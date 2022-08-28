@@ -1,19 +1,17 @@
 import React from 'react';
 import AddressDelivery from '../../components/addressDelivery';
-import Navbar from '../../components/Navbar';
+import FinalizeOrder from '../../components/finalizeOrders';
 import './Checkout.css';
 
 export default function Checkout() {
-/*   const [isDisabled, setIsDisabled] = useState(false);
-
-  const onHandleSubmit = async (e) => 'ok';
- */
   return (
     <div className="container-checkout">
-      <Navbar />
+      {/*  <Navbar /> */}
       <div className="addressDelivery">
+        <FinalizeOrder />
         <AddressDelivery />
       </div>
+
     </div>
   );
 }
