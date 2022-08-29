@@ -46,7 +46,8 @@ export default function FinalizeOrders() {
             type="button"
             onClick={ () => onHandleSubmit() }
           >
-            totalPrice {/* {`Total: R$${totalPrice}`} */}
+            totalPrice
+            {/* {`Total: R$${totalPrice}`} */}
           </button>
         </div>
       </div>
