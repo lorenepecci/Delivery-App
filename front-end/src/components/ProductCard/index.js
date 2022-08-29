@@ -15,6 +15,7 @@ function ProductCard({ product }) {
       setProductQnt(1);
       cart.push(product);
       localStorage.setItem('buyList', JSON.stringify(cart));
+      setBuyList(cart);
     } else {
       findProduct.quantity += 1;
       setProductQnt(findProduct.quantity);

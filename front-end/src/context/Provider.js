@@ -8,15 +8,12 @@ function Provider({ children }) {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    console.log('buyList1', buyList);
     if (buyList.length > 0) {
-      console.log('buyList2', buyList);
       const total = buyList.reduce((acc, cur) => {
         const result = acc + (cur.quantity * Number(cur.price));
         return result;
       }, 0);
-      console.log(total);
-      setTotalPrice(total);
+      setTotalPrice(total.toFixed(2));
     }
   }, [buyList, setBuyList]);
 
