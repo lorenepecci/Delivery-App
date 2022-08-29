@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Navbar from '../../components/Navbar';
 import ProductCard from '../../components/ProductCard';
 import { getAllProducts } from '../../services/api';
 import './style.css';
+import Context from '../../context/Context';
 
 export default function Products() {
-  const [ products, setProducts ] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  const { totalPrice } = useContext(Context);
+
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem('buyList'));
     if (!cart) localStorage.setItem('buyList', JSON.stringify([]));
     const getProducts = async () => {
       const result = await getAllProducts();
-      setProducts(result);
+      console.log(result.data.products);
+      setProducts(result.data.products);
     };
     getProducts();
   }, []);
@@ -34,14 +39,17 @@ export default function Products() {
     <div>
       <Navbar />
       {
-        products.filter((_el, i) => i < MAX_LENGTH).map((product, i) => (
-          <ProductCard
-            key={ i }
-            product={ product }
-            data-testid={ `customer_products__element-card-price-${i + 1}` }
-          />
-        ))
+        products.length > 0
+          ? products.filter((_el, i) => i < MAX_LENGTH).map((product, i) => (
+            <ProductCard
+              key={ i }
+              product={ product }
+              data-testid={ `customer_products__element-card-price-${i + 1}` }
+            />
+          ))
+          : null
       }
+      <button type="button">{ `Ver Carrinho: R$ ${totalPrice}` }</button>
     </div>
   );
 }

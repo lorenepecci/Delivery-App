@@ -1,26 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
+import Context from '../../context/Context';
 
 function ProductCard({ product }) {
+  const { setBuyList } = useContext(Context);
+
   const [productQnt, setProductQnt] = useState(0);
 
   const handleAddClick = () => {
     const cart = JSON.parse(localStorage.getItem('buyList'));
     const findProduct = cart.find((item) => item.id === product.id);
     if (!findProduct) {
-      product.qnt = 1;
+      product.quantity = 1;
       setProductQnt(1);
       cart.push(product);
       localStorage.setItem('buyList', JSON.stringify(cart));
     } else {
-      findProduct.qnt += 1;
-      setProductQnt(findProduct.qnt);
+      findProduct.quantity += 1;
+      setProductQnt(findProduct.quantity);
       const updatedCart = cart.map((item) => {
         if (item.id === product.id) {
-          return { ...item, qnt: findProduct.qnt };
+          return { ...item, quantity: findProduct.quantity };
         }
         return item;
       });
       localStorage.setItem('buyList', JSON.stringify(updatedCart));
+      setBuyList(updatedCart);
     }
   };
 
@@ -28,13 +33,13 @@ function ProductCard({ product }) {
     console.log(localStorage.getItem('buyList'));
     const cart = JSON.parse(localStorage.getItem('buyList'));
     const findProduct = cart.find((item) => item.id === product.id);
-    console.log(findProduct.qnt, (findProduct.qnt >= 1));
-    if (findProduct.qnt >= 1) {
-      findProduct.qnt -= 1;
-      setProductQnt(findProduct.qnt);
+    console.log(findProduct.quantity, (findProduct.quantity >= 1));
+    if (findProduct.quantity >= 1) {
+      findProduct.quantity -= 1;
+      setProductQnt(findProduct.quantity);
       const updatedCart = cart.reduce((acc, item) => {
         if (item.id === product.id) {
-          acc.push({ ...item, qnt: findProduct.qnt });
+          acc.push({ ...item, quantity: findProduct.quantity });
           return acc;
         }
         acc.push(item);
@@ -42,6 +47,7 @@ function ProductCard({ product }) {
       }, []);
       console.log(updatedCart);
       localStorage.setItem('buyList', JSON.stringify(updatedCart));
+      setBuyList(updatedCart);
     }
   };
 
@@ -50,20 +56,22 @@ function ProductCard({ product }) {
     const cart = JSON.parse(localStorage.getItem('buyList'));
     const findProduct = cart.find((item) => item.id === product.id);
     if (value > 0 && findProduct) {
-      findProduct.qnt = value;
-      setProductQnt(findProduct.qnt);
+      findProduct.quantity = value;
+      setProductQnt(findProduct.quantity);
       const updatedCart = cart.map((item) => {
         if (item.id === product.id) {
-          return { ...item, qnt: findProduct.qnt };
+          return { ...item, quantity: findProduct.quantity };
         }
         return item;
       });
       localStorage.setItem('buyList', JSON.stringify(updatedCart));
-    }   
+      setBuyList(updatedCart);
+    }
   };
 
   return (
     <section>
+      { console.log(product, 'product') }
       <div>{ product.price }</div>
       <img src={ product.urlImage } alt={ product.name } />
       <div>{ product.name }</div>
@@ -73,5 +81,15 @@ function ProductCard({ product }) {
     </section>
   );
 }
+
+ProductCard.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    urlImage: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
+  }).isRequired,
+};
 
 export default ProductCard;
