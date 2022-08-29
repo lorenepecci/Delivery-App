@@ -1,11 +1,11 @@
 const productsService = require('../services/products.service');
 
-const productsController = {
-  async findAll(req, res) {
-    const products = await productsService.findAll();
+const productsRouter = Router();
 
-    return res.status(200).json({ products });
-  },
-};
+productsRouter.get('/', async (req, res) => {
+  const products = await productsService.findAll();
 
-module.exports = productsController;
+  return res.status(200).json({ products });
+});
+
+module.exports = productsRouter;
