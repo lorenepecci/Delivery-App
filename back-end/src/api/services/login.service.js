@@ -6,7 +6,7 @@ const { generateJWTToken } = require('../utils/JWTToken');
 const login = async ({ email, password }) => {
   const user = await User.findOne({ where: { email } });
   
-  if (!user) throw new HttpException(401, 'Wrong credentials');
+  if (!user) throw new HttpException(404, 'Not found');
   
   const { name, role } = user;
   const crypted = md5(password);
@@ -15,7 +15,7 @@ const login = async ({ email, password }) => {
     throw new HttpException(401, 'Wrong credentials');
   } 
 
-  const token = generateJWTToken({ email, name, role, password });
+  const token = generateJWTToken({ email, name, role, id: user.id });
 
   return { name, email, role, token };
 };

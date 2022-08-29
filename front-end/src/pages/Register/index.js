@@ -6,6 +6,7 @@ import './Register.css';
 export default function Register() {
   const history = useHistory();
   const [isDisabled, setIsDisabled] = useState(true);
+  const [error, setError] = useState(false);
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -14,11 +15,13 @@ export default function Register() {
 
   useEffect(() => {
     const validadeForm = () => {
-      const { email, password } = user;
+      const { name, email, password } = user;
       const emailRegex = /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/i;
       const minPasswordLenght = 5;
+      const minNameLenght = 12;
       if (emailRegex.test(email)
-        && password.length > minPasswordLenght) {
+        && password.length > minPasswordLenght
+        && name.length > minNameLenght) {
         setIsDisabled(false);
       } else {
         setIsDisabled(true);
@@ -38,12 +41,12 @@ export default function Register() {
   const onHandleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('try');
       const response = await postRegister(user);
-      console.log(response, 'response');
-      history.push('/login');
-    } catch (error) {
-      console.log(error, 'regist erro');
+      if (!response) throw Error;
+      history.push('/customer/products');
+    } catch (err) {
+      setError(true);
+      console.log('register error', err);
     }
   };
 
@@ -52,7 +55,7 @@ export default function Register() {
       <label htmlFor="name">
         <p>Nome:</p>
         <input
-          data-testid="input-name"
+          data-testid="common_register__input-name"
           id="name"
           type="text"
           value={ user.name }
@@ -63,7 +66,7 @@ export default function Register() {
       <label htmlFor="email">
         <p>Email:</p>
         <input
-          data-testid="input-email"
+          data-testid="common_register__input-email"
           id="email"
           type="text"
           value={ user.email }
@@ -74,7 +77,7 @@ export default function Register() {
       <label htmlFor="password">
         <p>Senha:</p>
         <input
-          data-testid="input-password"
+          data-testid="common_register__input-password"
           id="password"
           type="text"
           value={ user.password }
@@ -84,7 +87,7 @@ export default function Register() {
       </label>
       <button
         className={ `btn-login ${isDisabled ? 'disabled' : 'notDisabled'}` }
-        data-testid="btn-login"
+        data-testid="common_register__button-register"
         type="button"
         onClick={ (e) => onHandleSubmit(e) }
         disabled={ isDisabled }
@@ -92,6 +95,10 @@ export default function Register() {
         CADASTRAR
 
       </button>
+      { error ? (
+        <span data-testid="common_register__element-invalid_register">
+          Error
+        </span>) : null }
 
     </form>
   );

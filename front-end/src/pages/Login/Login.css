@@ -6,7 +6,6 @@
   flex-direction: column;
   justify-content: center;
   padding: 1rem 2rem;
-  text-align: center;
   width: 200px;
 }
 
@@ -14,7 +13,7 @@ label {
   display: flex;
   flex-direction: column;
   justify-content: left;
-  text-align: left;
+  width: 100%;
 }
 
 p {
@@ -28,6 +27,7 @@ input {
   border-radius: 3px;
   margin: 5px;
   padding: 10px;
+
 }
 
 .btn-login {
@@ -37,6 +37,7 @@ input {
   color: white;
   margin: 5px;
   padding: 10px;
+  width: 100%;
 }
 
 .btn-register {
@@ -46,5 +47,6 @@ input {
   color: rgb(6, 131, 93);
   margin: 5px;
   padding: 10px;
+  width: 100%;
 }
 
