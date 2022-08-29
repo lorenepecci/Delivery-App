@@ -1,6 +1,6 @@
 import React from 'react';
-import AddressDelivery from '../../components/addressDelivery';
-import FinalizeOrder from '../../components/finalizeOrders';
+import AddressDelivery from '../../components/AddressDelivery';
+import FinalizeOrder from '../../components/FinalizeOrders';
 import './Checkout.css';
 
 export default function Checkout() {
