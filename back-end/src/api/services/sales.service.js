@@ -1,22 +1,24 @@
-const { Sale } = require('../../database/models');
+const { Sale, sequelize } = require('../../database/models');
 const { SalesProduct } = require('../../database/models');
 
 const create = async (saleData, userId) => {
   const { totalPrice, deliveryAddress, deliveryNumber, sellerId, products } = saleData;
 
-  const createdSale = await Sale.create({
-    userId,
-    totalPrice, 
-    deliveryAddress,
-    deliveryNumber,
-    sellerId,
+  await sequelize.transaction(async (t) => {
+    const createdSale = await Sale.create({
+      userId,
+      totalPrice, 
+      deliveryAddress,
+      deliveryNumber,
+      sellerId,
+    }, { transaction: t });
+  
+    await SalesProduct.bulkCreate(products.map((product) => ({
+      saleId: createdSale.dataValues.id,
+      productId: product.id,
+      quantity: product.quantity,
+    })), { transaction: t });
   });
-
-  await SalesProduct.bulkCreate(products.map((product) => ({
-    saleId: createdSale.dataValues.id,
-    productId: product.id,
-    quantity: product.quantity,
-  })));
 };
 
 const getBySeller = async (sellerId) => {
