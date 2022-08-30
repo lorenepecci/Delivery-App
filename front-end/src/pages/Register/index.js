@@ -24,6 +24,7 @@ export default function Register() {
         && name.length > minNameLenght) {
         setIsDisabled(false);
       } else {
+        console.log('else', name.length, email, password);
         setIsDisabled(true);
       }
     };

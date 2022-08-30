@@ -10,7 +10,7 @@ const routers = express.Router();
 
 routers.use('/register', registerController);
 routers.use('/login', loginController);
-routers.get('/products', productsController.findAll);
+routers.use('/products', productsController);
 routers.use('/admin/manage', adminController);
 routers.use('/sales', saleController);
 routers.use('/users', userController);

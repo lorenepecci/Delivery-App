@@ -39,7 +39,7 @@ export default function Login() {
     try {
       const response = await postLogin(user);
       if (!response) throw Error;
-      localStorage.setItem('user', JSON.stringify(response));
+      localStorage.setItem('user', JSON.stringify(response.data));
       history.push('/customer/products');
     } catch (err) {
       setError(true);

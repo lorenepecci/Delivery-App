@@ -31,8 +31,23 @@ const getByUser = async (userId) => {
   return sales;
 };
 
-module.exports = { 
+const updateStatus = async (id, status = 'Entregue') => {
+  const sale = await Sale.findOne({ where: { id } });
+
+  if (!sale) {
+    throw new Error('Sale not found');
+  }
+
+  sale.status = status;
+
+  await sale.save();
+
+  return sale;
+};
+
+module.exports = {
   create,
   getBySeller,
   getByUser,
+  updateStatus,
 };
