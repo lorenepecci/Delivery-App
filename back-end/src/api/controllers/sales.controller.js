@@ -9,9 +9,9 @@ saleRoute.post(
   authenticationMiddleware,
   async (req, res) => {
     const { id } = res.locals.payload;
-    await salesService.create(req.body, id);
+    const saleId = await salesService.create(req.body, id);
 
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ saleId });
   },
 );
 

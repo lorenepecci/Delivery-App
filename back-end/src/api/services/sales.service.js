@@ -2,10 +2,11 @@ const { Sale, sequelize } = require('../../database/models');
 const { SalesProduct } = require('../../database/models');
 
 const create = async (saleData, userId) => {
+  let createdSale;
   const { totalPrice, deliveryAddress, deliveryNumber, sellerId, products } = saleData;
 
   await sequelize.transaction(async (t) => {
-    const createdSale = await Sale.create({
+    createdSale = await Sale.create({
       userId,
       totalPrice, 
       deliveryAddress,
@@ -19,6 +20,8 @@ const create = async (saleData, userId) => {
       quantity: product.quantity,
     })), { transaction: t });
   });
+
+  return createdSale.dataValues.id;
 };
 
 const getBySeller = async (sellerId) => {
@@ -29,6 +32,16 @@ const getBySeller = async (sellerId) => {
 const getByUser = async (userId) => {
   const sales = await Sale.findAll({ where: { userId } });
   return sales;
+};
+
+const getById = async (id) => {
+  const sale = await Sale.findOne({ where: { id } });
+
+  if (!sale) {
+    throw new Error('Sale not found');
+  }
+
+  return sale;
 };
 
 const updateStatus = async (id, status = 'Entregue') => {
@@ -50,4 +63,5 @@ module.exports = {
   getBySeller,
   getByUser,
   updateStatus,
+  getById,
 };
