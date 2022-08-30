@@ -1,15 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './style.css';
 
-export default function Navbar() {
+export default function Navbar({ name }) {
   const history = useHistory();
-
-  // const user = JSON.parse(localStorage.getItem('user'));
-
-  const user = { data: { name: 'Vallim' } };
-
-  const { data } = user;
 
   return (
     <header>
@@ -30,7 +25,7 @@ export default function Navbar() {
         </button>
         <div>
           <p data-testid="customer_products__element-navbar-user-full-name">
-            { data.name }
+            { name }
           </p>
         </div>
         <button
@@ -44,3 +39,7 @@ export default function Navbar() {
     </header>
   );
 }
+
+Navbar.propTypes = {
+  name: PropTypes.string.isRequired,
+};

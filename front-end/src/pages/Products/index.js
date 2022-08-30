@@ -7,6 +7,13 @@ import { getAllProducts } from '../../services/api';
 export default function Products() {
   const [products, setProducts] = useState([]);
 
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    role: '',
+    token: '',
+  });
+
   const { totalPrice } = useContext(Context);
 
   useEffect(() => {
@@ -14,10 +21,12 @@ export default function Products() {
     if (!cart) localStorage.setItem('buyList', JSON.stringify([]));
     const getProducts = async () => {
       const result = await getAllProducts();
-      console.log(result.data.products);
+      console.log('products', result.data.products);
       setProducts(result.data.products);
     };
     getProducts();
+    const userInfo = JSON.parse(localStorage.getItem('user'));
+    if (userInfo) setUser(userInfo);
   }, []);
 
   const MAX_LENGTH = 11;
@@ -36,7 +45,7 @@ export default function Products() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar name={ user.name } />
       {
         products.length > 0
           ? products.filter((_el, i) => i < MAX_LENGTH).map((product, i) => (
@@ -48,7 +57,12 @@ export default function Products() {
           ))
           : null
       }
-      <button type="button">{ `Ver Carrinho: R$ ${totalPrice}` }</button>
+      <button type="button">
+        { `Ver Carrinho: R$ ${Number(totalPrice).toLocaleString('pt-BR', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}` }
+      </button>
     </div>
   );
 }
