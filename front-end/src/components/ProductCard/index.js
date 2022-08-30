@@ -79,7 +79,7 @@ function ProductCard({ product }) {
   };
 
   return (
-    <section>
+    <section className="product-card">
       <div>{ product.price }</div>
       <img src={ product.urlImage } alt={ product.name } />
       <div>{ product.name }</div>
