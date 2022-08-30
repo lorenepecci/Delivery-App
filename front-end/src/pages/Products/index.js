@@ -28,7 +28,6 @@ export default function Products() {
     };
     getProducts();
     const userInfo = JSON.parse(localStorage.getItem('user'));
-    if (!userInfo) history.push('/login');
     if (userInfo) setUser(userInfo);
   }, []);
 
