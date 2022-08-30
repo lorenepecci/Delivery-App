@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import Context from '../../context/Context';
+import { getUsersSellers, postSalesCheckout } from '../../services/api';
 import './AddressDelivery.css';
 
 export default function AddressDelivery() {
   const [userAddress, setUserAddress] = useState({
     address: '',
     number: 0,
-    seller: '',
+    seller: 1,
   });
-  const [listSellers] = useState(['lorene', 'augusto', 'douglas']);
+  const [listSellers, setListSellers] = useState([]);
+  const { buyList, totalPrice } = useContext(Context);
 
   const handleChange = ({ target }) => {
     const { id, value } = target;
@@ -15,20 +18,34 @@ export default function AddressDelivery() {
       ...prevState,
       [id]: value,
     }));
-    console.log(userAddress);
   };
 
-  const onHandleSubmit = () => {
-    // req 20
-    /* try {
-      console.log('try checkout');
-      const response = await postLogin(user);
-      localStorage.setItem('user', JSON.stringify(response.data));
-      history.push('/customer/products');
+  useEffect(() => {
+    const func = async () => {
+      try {
+        console.log('try checkout');
+        const response = await getUsersSellers();
+        console.log(response);
+        setListSellers(response);
+      } catch (erro) {
+        console.log(erro, 'checkout erro');
+      }
+    };
+    func();
+  }, []);
+
+  const onHandleSubmit = async () => {
+    try {
+      await postSalesCheckout({
+        totalPrice: Number(totalPrice),
+        deliveryAddress: userAddress.address,
+        deliveryNumber: userAddress.number,
+        sellerId: userAddress.seller,
+        products: buyList.map((item) => ({ id: item.id, quantity: item.quantity })),
+      });
     } catch (erro) {
-      setError(true);
       console.log(erro, 'checkout erro');
-    } */
+    }
   };
 
   return (
@@ -44,8 +61,8 @@ export default function AddressDelivery() {
               id="seller"
               onChange={ (e) => handleChange(e) }
             >
-              { listSellers.map((item, index) => (
-                <option key={ index } value={ item }>{item}</option>
+              { listSellers.length && listSellers.map((item, index) => (
+                <option key={ index } value={ item.id }>{item.name}</option>
               ))}
             </select>
           </label>
@@ -77,7 +94,7 @@ export default function AddressDelivery() {
             className="btn-finalizar"
             data-testid="customer_checkout__button-submit-order"
             type="button"
-            onClick={ () => onHandleSubmit() }
+            onClick={ onHandleSubmit }
           >
             FINALIZAR PEDIDO
           </button>

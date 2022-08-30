@@ -1,23 +1,18 @@
 import PropTypes from 'prop-types';
-import React, { useState, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Context from './Context';
 
 function Provider({ children }) {
   const [buyList, setBuyList] = useState([]);
-
   const [totalPrice, setTotalPrice] = useState(0);
-  // useEffect(() => {
-  //   console.log('useEffect');
-  //   console.log('teste', buyList.length);
-  //   if (buyList.length > 0) {
-  //     console.log('teste2');
-  //     const total = buyList.reduce((acc, cur) => {
-  //       const result = acc + (cur.quantity * Number(cur.price));
-  //       return result;
-  //     }, 0);
-  //     setTotalPrice(total.toFixed(2));
-  //   }
-  // }, [buyList]);
+
+  useEffect(() => {
+    localStorage.setItem('buysList', JSON.stringify(buyList));
+  }, [setBuyList, buyList]);
+
+  useEffect(() => {
+    setBuyList(JSON.parse(localStorage.getItem('buysList')));
+  }, []);
 
   const contextData = useMemo(() => ({
     buyList,
