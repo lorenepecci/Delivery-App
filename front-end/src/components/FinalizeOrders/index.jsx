@@ -1,28 +1,19 @@
-import React from 'react';
-import './FinalizeOrder.css';
+import React, { useContext } from 'react';
+import Context from '../../context/Context';
 import OrderCard from '../OrderCard';
+import './FinalizeOrder.css';
 
 export default function FinalizeOrders() {
-  // const [totalPrice, setTotalPrice] = useState();
-
+  const { buyList, totalPrice } = useContext(Context);
   const onHandleSubmit = () => {
     //
   };
-
-  // const ordersList = JSON.parse(localStorage.getItem('buyList'));
-
-  const ordersList = [{
-    id: 1,
-    name: 'Coca Cola',
-    price: 10.50,
-    quantity: 4,
-  }];
 
   return (
     <div>
       <h2>Finalizar Pedido</h2>
       <div className="container-finalize-order">
-        <div>
+        <div className="container-finalize-order-title">
           <span>Item</span>
           <span>Descrição</span>
           <span>Quantidade</span>
@@ -31,7 +22,7 @@ export default function FinalizeOrders() {
           <span>Remover Item</span>
         </div>
         {
-          ordersList.map((order, i) => (
+          buyList.map((order, i) => (
             <OrderCard
               key={ i }
               index={ i }
@@ -46,8 +37,7 @@ export default function FinalizeOrders() {
             type="button"
             onClick={ () => onHandleSubmit() }
           >
-            totalPrice
-            {/* {`Total: R$${totalPrice}`} */}
+            {`totalPrice ${totalPrice}`}
           </button>
         </div>
       </div>

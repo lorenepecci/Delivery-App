@@ -11,7 +11,6 @@ export default function Checkout() {
         <FinalizeOrder />
         <AddressDelivery />
       </div>
-
     </div>
   );
 }

@@ -4,7 +4,6 @@ import Context from '../../context/Context';
 
 function ProductCard({ product }) {
   const { buyList, setBuyList, setTotalPrice } = useContext(Context);
-
   const [productQnt, setProductQnt] = useState(0);
 
   const updateTotal = (cart) => {
@@ -23,18 +22,17 @@ function ProductCard({ product }) {
   });
 
   const handleAddClick = () => {
-    const cart = buyList;
-    const findProduct = cart.find((item) => item.id === product.id);
+    const findProduct = buyList.find((item) => item.id === product.id);
     if (!findProduct) {
       product.quantity = 1;
       setProductQnt(1);
-      cart.push(product);
-      updateTotal(cart);
-      setBuyList(cart);
+      buyList.push(product);
+      updateTotal(buyList);
+      setBuyList(buyList);
     } else {
       findProduct.quantity += 1;
       setProductQnt(findProduct.quantity);
-      const updatedCart = updateCart(cart, findProduct.quantity);
+      const updatedCart = updateCart(buyList, findProduct.quantity);
       updateTotal(updatedCart);
       setBuyList(updatedCart);
     }
