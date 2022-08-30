@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import React, { useContext, useState } from 'react';
 import Context from '../../context/Context';
 
 function ProductCard({ product }) {

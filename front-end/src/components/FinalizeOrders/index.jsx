@@ -5,9 +5,6 @@ import './FinalizeOrder.css';
 
 export default function FinalizeOrders() {
   const { buyList, totalPrice } = useContext(Context);
-  const onHandleSubmit = () => {
-    //
-  };
 
   return (
     <div>
@@ -35,7 +32,6 @@ export default function FinalizeOrders() {
             className="btn-total-value"
             data-testid="customer_checkout__element-order-total-price"
             type="button"
-            onClick={ () => onHandleSubmit() }
           >
             {`totalPrice ${totalPrice}`}
           </button>

@@ -9,7 +9,7 @@ import './Products.css';
 export default function Products() {
   const history = useHistory();
   const [products, setProducts] = useState([]);
-  const { totalPrice } = useContext(Context);
+  const { totalPrice, setBuyList } = useContext(Context);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -22,6 +22,8 @@ export default function Products() {
   const MAX_LENGTH = 11;
 
   const onHandleClick = () => {
+    const get = JSON.parse(localStorage.getItem('buysList'));
+    setBuyList(get);
     history.push('/customer/checkout');
   };
 

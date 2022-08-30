@@ -1,0 +1,41 @@
+.order-card-customer-container {
+  background-color: white;
+  box-shadow: inset 0 0 0.7em gray;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  margin: 10px;
+  max-height: 100px;
+  max-width: 300px;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+
+}
+
+.order-card-customer-middle {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.order-card-customer-pedido {
+  padding: 5px;
+}
+
+.order-card-customer-status {
+  background-color: rgb(209, 209, 32);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.p-status {
+  margin: auto;
+}
+
+.order-card-address {
+  padding: 3px;
+}
+

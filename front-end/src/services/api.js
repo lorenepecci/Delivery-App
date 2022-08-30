@@ -3,7 +3,6 @@ import axios from 'axios';
 const instance = axios.create({
   baseURL: 'http://localhost:3001',
 });
-//
 
 // baseURL: `http://${process.env.REACT_APP_HOSTNAME}:${process.env.REACT_APP_BACKEND_PORT}`,
 
@@ -46,14 +45,12 @@ const getUsersSellers = async () => {
 };
 
 const postSalesCheckout = async (obj) => {
-  console.log(obj);
   const user = JSON.parse(localStorage.getItem(('user')));
   const instanceToken = axios.create({
     baseURL: 'http://localhost:3001',
     headers: { authorization: user.token },
   });
   try {
-    console.log(user.token);
     const r = await instanceToken.post('sales/customer/checkout', obj);
     return r;
   } catch (error) {
@@ -61,4 +58,25 @@ const postSalesCheckout = async (obj) => {
   }
 };
 
-export { postRegister, postLogin, getAllProducts, getUsersSellers, postSalesCheckout };
+const getOrdersCustomer = async () => {
+  const user = JSON.parse(localStorage.getItem(('user')));
+  const instanceToken = axios.create({
+    baseURL: 'http://localhost:3001',
+    headers: { authorization: user.token },
+  });
+  try {
+    const r = await instanceToken.get('/sales/customer/orders');
+    return r.data;
+  } catch (error) {
+    console.log(error, 'erroapi');
+  }
+};
+
+export {
+  postRegister,
+  postLogin,
+  getAllProducts,
+  getUsersSellers,
+  postSalesCheckout,
+  getOrdersCustomer,
+};
