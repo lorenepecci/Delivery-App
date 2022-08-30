@@ -46,11 +46,11 @@ describe('Testing salesService functions', () => {
   });
 
   context('Function create', () => {
-    it('Should return undefined', async () => {
+    it('Should return a number', async () => {
       const result = await salesService
         .create({ ...salesMock, products: [salesProductMock] }, 1);
 
-      expect(result).to.be.undefined;
+      expect(result).to.be.a('number');
     });
   });
 
