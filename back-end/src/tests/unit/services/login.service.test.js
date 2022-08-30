@@ -37,7 +37,7 @@ describe('Testing loginService functions', () => {
   context('Function login', () => {
     it('Should throw an exception if passed wrong email', async () => {
       await expect(loginService.login({ ...loginMock, email: 'wrong-email' }))
-        .to.be.rejectedWith(HttpException, 'Wrong credentials');
+        .to.be.rejectedWith(HttpException, 'Not found');
     });
 
     it('Should throw an exception if passed right email and wrong password', async () => {

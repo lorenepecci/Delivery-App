@@ -1,10 +1,9 @@
 const chai = require('chai');
 const sinon = require('sinon');
 
-const { Sale } = require('../../../database/models');
+const { Sale, SalesProduct } = require('../../../database/models');
 const salesService = require('../../../api/services/sales.service');
 const { expect } = require('chai');
-const HttpException = require('../../../api/utils/HttpException');
 
 chai.use(require('chai-as-promised'));
 
@@ -12,23 +11,13 @@ const salesMock = [
   {
     id: 1,
     userId: 1,
-    sellerId: 2,
+    sellerId: 1,
     totalPrice: 100,
     deliveryAddress: "Wall Street",
     deliveryNumber: "1",
     saleDate: "2022-08-27T13:03:25.000Z",
     status: 'Pendente'
   },
-  {
-    id: 2,
-    userId: 1,
-    sellerId: 2,
-    totalPrice: 150,
-    deliveryAddress: "Broadway",
-    deliveryNumber: "2",
-    saleDate: "2022-08-27T13:24:01.000Z",
-    status: 'Pendente'
-  }
 ]
 
 const salesProductMock = [
@@ -37,20 +26,14 @@ const salesProductMock = [
     productId: 1,
     quantity: 20
   },
-  {
-    saleId: 1,
-    productId: 2,
-    quantity: 30
-  }
 ]
-
 
 describe('Testing salesService functions', () => {
   before(async () => {
     sinon.stub(Sale, 'create')
       .resolves({ dataValues: salesMock[0] });
 
-    sinon.stub(Sale, 'bulkCreate')
+    sinon.stub(SalesProduct, 'bulkCreate')
       .resolves([ { dataValues: salesProductMock[0] } ]);
       
     sinon.stub(Sale, 'findAll')
@@ -63,20 +46,31 @@ describe('Testing salesService functions', () => {
   });
 
   context('Function create', () => {
-    it('', async () => {
+    it('Should return undefined', async () => {
+      const result = await salesService
+        .create({ ...salesMock, products: [salesProductMock] }, 1);
 
+      expect(result).to.be.undefined;
     });
   });
 
   context('Function getBySeller', () => {
-    it('', async () => {
-
+    it('Should return an array of objects', async () => {
+      const result = await salesService
+        .getBySeller(1);
+      
+      expect(result).to.be.an('array');
+      expect(result[0]).to.be.an('object');
     });
   });
   
   context('Function getByUser', () => {
-    it('', async () => {
-
+    it('Should return an array of objects', async () => {
+      const result = await salesService
+        .getByUser(1);
+      
+      expect(result).to.be.an('array');
+      expect(result[0]).to.be.an('object');
     });
   });
 });
