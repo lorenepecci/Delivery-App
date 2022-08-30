@@ -28,12 +28,15 @@ export default function Products() {
     };
     getProducts();
     const userInfo = JSON.parse(localStorage.getItem('user'));
+    if (!userInfo) history.push('/login');
     if (userInfo) setUser(userInfo);
   }, []);
 
   const MAX_LENGTH = 11;
 
   const onHandleClick = () => {
+    const userInfo = JSON.parse(localStorage.getItem('user'));
+    if (!userInfo) history.push('/login');
     history.push('/customer/checkout');
   };
 

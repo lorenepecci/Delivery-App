@@ -30,7 +30,11 @@ export default function Navbar({ name }) {
         </div>
         <button
           type="button"
-          onClick={ () => localStorage.removeItem('user') }
+          onClick={ () => {
+            localStorage.removeItem('user');
+            const userInfo = JSON.parse(localStorage.getItem('user'));
+            if (!userInfo) history.push('/login');
+          } }
           data-testid="customer_products__element-navbar-link-logout"
         >
           Sair
