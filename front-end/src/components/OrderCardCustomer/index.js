@@ -7,6 +7,7 @@ export default function OrderCardCustomer({ order }) {
   const history = useHistory();
   return (
     <button
+      className="order-card-customer-container-button"
       type="button"
       onClick={ () => history.push(`orders/${order.id}`) }
     >

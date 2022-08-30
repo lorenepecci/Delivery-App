@@ -45,6 +45,7 @@ const getUsersSellers = async () => {
 };
 
 const postSalesCheckout = async (obj) => {
+  console.log(obj);
   const user = JSON.parse(localStorage.getItem(('user')));
   const instanceToken = axios.create({
     baseURL: 'http://localhost:3001',

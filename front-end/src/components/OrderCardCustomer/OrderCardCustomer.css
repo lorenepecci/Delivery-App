@@ -1,3 +1,10 @@
+.order-card-customer-container-button {
+  border-color: transparent;
+  margin: 10px;
+  max-height: 100px;
+  max-width: 300px;
+}
+
 .order-card-customer-container {
   background-color: white;
   box-shadow: inset 0 0 0.7em gray;
@@ -5,13 +12,11 @@
   flex-direction: column;
   height: 100%;
   justify-content: center;
-  margin: 10px;
-  max-height: 100px;
-  max-width: 300px;
-  padding: 10px;
+  padding-bottom: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
   text-align: center;
   width: 100%;
-
 }
 
 .order-card-customer-middle {
@@ -21,7 +26,7 @@
 }
 
 .order-card-customer-pedido {
-  padding: 5px;
+  margin: 7px;
 }
 
 .order-card-customer-status {
@@ -33,6 +38,7 @@
 
 .p-status {
   margin: auto;
+  padding: 5px;
 }
 
 .order-card-address {
