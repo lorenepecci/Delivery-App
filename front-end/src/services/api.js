@@ -28,4 +28,14 @@ const postLogin = async (body) => {
   }
 };
 
-export { postRegister, postLogin };
+const getAllProducts = async () => {
+  try {
+    const r = await instance.get('/products');
+    console.log(r, 'rrrrrr');
+    return r;
+  } catch (error) {
+    console.log(error, 'erroapi');
+  }
+};
+
+export { postRegister, postLogin, getAllProducts };
