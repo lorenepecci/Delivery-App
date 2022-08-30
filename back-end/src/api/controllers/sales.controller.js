@@ -26,6 +26,12 @@ saleRoute.get(
   },
 );
 
+saleRoute.get('/customer/orders/:id', authenticationMiddleware, async (req, res) => {
+  const { id } = req.params;
+  const sale = await salesService.getById(id);
+  return res.status(200).json(sale);
+});
+
 saleRoute.get('/seller/orders', authenticationMiddleware, async (req, res) => {
   const { id } = res.locals.payload;
   const sales = await salesService.getBySeller(id);
