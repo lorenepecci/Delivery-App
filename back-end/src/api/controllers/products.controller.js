@@ -1,3 +1,4 @@
+const { Router } = require('express');
 const productsService = require('../services/products.service');
 
 const productsRouter = Router();

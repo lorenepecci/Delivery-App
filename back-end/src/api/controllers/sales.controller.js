@@ -12,7 +12,7 @@ saleRoute.post(
     await salesService.create(req.body, id);
 
     return res.status(200).json({ success: true });
-  }
+  },
 );
 
 saleRoute.get(
@@ -23,7 +23,7 @@ saleRoute.get(
     const sales = await salesService.getByUser(id);
 
     return res.status(200).json(sales);
-  }
+  },
 );
 
 saleRoute.get('/seller/orders', authenticationMiddleware, async (req, res) => {
