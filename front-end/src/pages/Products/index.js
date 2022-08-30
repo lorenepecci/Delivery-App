@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import ProductCard from '../../components/ProductCard';
-import { getAllProducts } from '../../services/api';
-import './style.css';
 import Context from '../../context/Context';
+import { getAllProducts } from '../../services/api';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
