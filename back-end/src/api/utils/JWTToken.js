@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-const HttpException = require('./HttpException');
 const fs = require('fs');
+const HttpException = require('./HttpException');
 
 const key = fs.readFileSync('./jwt.evaluation.key', 'utf-8');
 
