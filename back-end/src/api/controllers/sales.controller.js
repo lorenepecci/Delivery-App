@@ -9,9 +9,9 @@ saleRoute.post(
   authenticationMiddleware,
   async (req, res) => {
     const { id } = res.locals.payload;
-    await salesService.create(req.body, id);
+    const saleId = await salesService.create(req.body, id);
 
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ saleId });
   },
 );
 
@@ -25,6 +25,12 @@ saleRoute.get(
     return res.status(200).json(sales);
   },
 );
+
+saleRoute.get('/customer/orders/:id', authenticationMiddleware, async (req, res) => {
+  const { id } = req.params;
+  const sale = await salesService.getById(id);
+  return res.status(200).json(sale);
+});
 
 saleRoute.get('/seller/orders', authenticationMiddleware, async (req, res) => {
   const { id } = res.locals.payload;
