@@ -8,7 +8,7 @@ import './Products.css';
 
 export default function Products() {
   const history = useHistory();
-  
+
   const [products, setProducts] = useState([]);
 
   const [user, setUser] = useState({
@@ -67,7 +67,7 @@ export default function Products() {
         type="button"
         className="button-products"
         onClick={ onHandleClick }
-       >
+      >
         { `Ver Carrinho: R$ ${Number(totalPrice).toLocaleString('pt-BR', {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
