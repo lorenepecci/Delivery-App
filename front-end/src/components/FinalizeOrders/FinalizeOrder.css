@@ -19,3 +19,9 @@
   margin: 5px;
   padding: 10px;
 }
+
+.container-finalize-order-title {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}

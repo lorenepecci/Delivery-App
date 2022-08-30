@@ -1,26 +1,29 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import ProductCard from '../../components/ProductCard';
 import Context from '../../context/Context';
 import { getAllProducts } from '../../services/api';
+import './Products.css';
 
 export default function Products() {
+  const history = useHistory();
   const [products, setProducts] = useState([]);
-
   const { totalPrice } = useContext(Context);
 
   useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem('buyList'));
-    if (!cart) localStorage.setItem('buyList', JSON.stringify([]));
     const getProducts = async () => {
       const result = await getAllProducts();
-      console.log(result.data.products);
       setProducts(result.data.products);
     };
     getProducts();
   }, []);
 
   const MAX_LENGTH = 11;
+
+  const onHandleClick = () => {
+    history.push('/customer/checkout');
+  };
 
   // const products = [{
   //   id: 1,
@@ -35,7 +38,7 @@ export default function Products() {
   // }];
 
   return (
-    <div>
+    <div className="products-container">
       <Navbar />
       {
         products.length > 0
@@ -48,7 +51,13 @@ export default function Products() {
           ))
           : null
       }
-      <button type="button">{ `Ver Carrinho: R$ ${totalPrice}` }</button>
+      <button
+        className="button-products"
+        type="button"
+        onClick={ onHandleClick }
+      >
+        { `Ver Carrinho: R$ ${totalPrice}` }
+      </button>
     </div>
   );
 }

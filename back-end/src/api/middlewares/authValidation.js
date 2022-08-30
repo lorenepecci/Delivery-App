@@ -3,7 +3,7 @@ const { authenticateToken } = require('../utils/JWTToken');
 
 const authenticationMiddleware = async (req, res, next) => {
   const token = req.headers.authorization;
-
+  console.log(token)
   if (!token) {
     throw new HttpException(401, 'Token not found');
   }
