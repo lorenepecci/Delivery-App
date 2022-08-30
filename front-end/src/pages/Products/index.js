@@ -43,7 +43,7 @@ export default function Products() {
             <ProductCard
               key={ i }
               product={ product }
-              data-testid={ `customer_products__element-card-price-${i + 1}` }
+              index={ i + 1 }
             />
           ))
           : null

@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../../context/Context';
 
-function ProductCard({ product }) {
+function ProductCard({ product, index }) {
   const { buyList, setBuyList, setTotalPrice } = useContext(Context);
 
   const [productQnt, setProductQnt] = useState(0);
@@ -80,12 +80,37 @@ function ProductCard({ product }) {
 
   return (
     <section className="product-card">
-      <div>{ product.price }</div>
-      <img src={ product.urlImage } alt={ product.name } />
-      <div>{ product.name }</div>
-      <button type="button" onClick={ handleAddClick }>+</button>
-      <input type="number" onChange={ handleChange } value={ productQnt } />
-      <button type="button" onClick={ handleRemoveClick }>-</button>
+      <div data-testid={ `customer_products__element-card-price-${index}` }>
+        { product.price }
+      </div>
+      <img
+        src={ product.urlImage }
+        alt={ product.name }
+        data-testid={ `customer_products__img-card-bg-image-${index}` }
+      />
+      <div data-testid={ `customer_products__element-card-title-${index}` }>
+        { product.name }
+      </div>
+      <button
+        type="button"
+        onClick={ handleAddClick }
+        data-testid={ `customer_products__button-card-add-item-${index}` }
+      >
+        +
+      </button>
+      <input
+        type="number"
+        onChange={ handleChange }
+        value={ productQnt }
+        data-testid={ `customer_products__input-card-quantity-${index}` }
+      />
+      <button
+        type="button"
+        onClick={ handleRemoveClick }
+        data-testid={ `customer_products__button-card-rm-item-${index}` }
+      >
+        -
+      </button>
     </section>
   );
 }
@@ -98,6 +123,7 @@ ProductCard.propTypes = {
     urlImage: PropTypes.string.isRequired,
     quantity: PropTypes.number.isRequired,
   }).isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default ProductCard;
