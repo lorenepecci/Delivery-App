@@ -6,6 +6,7 @@ function Provider({ children }) {
   const [buyList, setBuyList] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [listOrders, setListOrders] = useState([]);
+  const [salesOrders, setSalesOrders] = useState([]);
 
   useEffect(() => {
     console.log('ativou');
@@ -19,7 +20,9 @@ function Provider({ children }) {
     setTotalPrice,
     listOrders,
     setListOrders,
-  }), [buyList, totalPrice, listOrders, setListOrders]);
+    salesOrders,
+    setSalesOrders,
+  }), [buyList, totalPrice, listOrders, salesOrders]);
 
   return (
     <Context.Provider value={ contextData }>

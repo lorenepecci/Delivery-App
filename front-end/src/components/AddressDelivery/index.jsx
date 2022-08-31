@@ -7,7 +7,7 @@ export default function AddressDelivery() {
   const [userAddress, setUserAddress] = useState({
     address: '',
     number: 0,
-    seller: 1,
+    seller: 2,
   });
   const [listSellers, setListSellers] = useState([]);
   const { buyList, totalPrice } = useContext(Context);

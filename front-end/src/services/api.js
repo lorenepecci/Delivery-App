@@ -74,6 +74,20 @@ const getOrdersCustomer = async () => {
   }
 };
 
+const getOrdersSeller = async () => {
+  const user = JSON.parse(localStorage.getItem(('user')));
+  const instanceToken = axios.create({
+    baseURL: URL,
+    headers: { authorization: user.token },
+  });
+  try {
+    const r = await instanceToken.get('/sales/seller/orders');
+    return r.data;
+  } catch (error) {
+    console.log(error, 'erroapi');
+  }
+};
+
 export {
   postRegister,
   postLogin,
@@ -81,4 +95,5 @@ export {
   getUsersSellers,
   postSalesCheckout,
   getOrdersCustomer,
+  getOrdersSeller,
 };
