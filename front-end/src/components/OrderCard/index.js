@@ -13,7 +13,11 @@ export default function OrderCard({ index, order }) {
 
   return (
     <div className="order-card-container">
-      <span>{ index + 1 }</span>
+      <span
+        data-testid={ `customer_checkout__element-order-table-item-number-${index}` }
+      >
+        { index + 1 }
+      </span>
       <span data-testid={ `customer_checkout__element-order-table-name-${index}` }>
         { order.name }
       </span>

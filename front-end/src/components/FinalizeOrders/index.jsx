@@ -10,7 +10,9 @@ export default function FinalizeOrders() {
     <div>
       <h2>Finalizar Pedido</h2>
       <div className="container-finalize-order">
-        <div className="container-finalize-order-title">
+        <div
+          className="container-finalize-order-title"
+        >
           <span>Item</span>
           <span>Descrição</span>
           <span>Quantidade</span>

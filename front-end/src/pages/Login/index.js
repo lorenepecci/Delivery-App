@@ -40,6 +40,9 @@ export default function Login() {
       const response = await postLogin(user);
       if (!response) throw Error;
       localStorage.setItem('user', JSON.stringify(response.data));
+      if (response.role === 'seller') {
+        history.push('/seller/orders');
+      }
       history.push('/customer/products');
     } catch (err) {
       setError(true);
