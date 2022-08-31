@@ -41,7 +41,7 @@ export default function AddressDelivery() {
       const response = await postSalesCheckout({
         totalPrice: Number(totalPrice),
         deliveryAddress: userAddress.address,
-        deliveryNumber: userAddress.number,
+        deliveryNumber: parseInt(userAddress.number, 10),
         sellerId: userAddress.seller,
         products: buyList.map((item) => ({ id: item.id, quantity: item.quantity })),
       });

@@ -20,7 +20,7 @@ const SalesSchema = (sequelize, DataTypes) =>{
     //  TO DO: Verificar formato da data
     saleDate: {
       type: DataTypes.DATE,
-      defaultValue: Date.now()
+      defaultValue: DataTypes.NOW
     },
 
     status: {
