@@ -78,11 +78,11 @@ function ProductCard({ product, index }) {
     }
   };
 
-  const func = async (url) => {
+/*   const func = async (url) => {
     const response = await axios(url, { responseType: 'arraybuffer' });
     const buffer64 = Buffer.from(response.data, 'binary').toString('base64');
     return buffer64;
-  };
+  }; */
 
   return (
     <section className="product-card">
@@ -93,7 +93,7 @@ function ProductCard({ product, index }) {
         })}
       </div>
       <img
-        src={ func(product.urlImage) }
+        src={ product.urlImage }
         alt={ product.name }
         data-testid={ `customer_products__img-card-bg-image-${index}` }
       />

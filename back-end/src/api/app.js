@@ -9,6 +9,8 @@ app.use(cors());
 
 app.use(express.json());
 
+// app.use('/images', express.static(__dirname + '/images'));
+
 app.use(require('./routes'));
 
 app.use(errorMiddleware);
