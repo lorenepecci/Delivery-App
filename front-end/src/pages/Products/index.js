@@ -18,6 +18,8 @@ export default function Products() {
     token: '',
   });
 
+  const [isDisabled, setIsDisabled] = useState(true);
+
   const { totalPrice } = useContext(Context);
 
   useEffect(() => {
@@ -31,13 +33,22 @@ export default function Products() {
     if (userInfo) setUser(userInfo);
   }, []);
 
-  const MAX_LENGTH = 11;
+  useEffect(() => {
+    const validadeCheckout = () => {
+      if (totalPrice > 0) {
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+    };
+    validadeCheckout();
+  }, [totalPrice]);
 
   const onHandleClick = () => {
-    const userInfo = JSON.parse(localStorage.getItem('user'));
-    if (!userInfo) history.push('/login');
     history.push('/customer/checkout');
   };
+
+  const MAX_LENGTH = 11;
 
   // const products = [{
   //   id: 1,
@@ -69,6 +80,7 @@ export default function Products() {
         type="button"
         className="button-products"
         onClick={ onHandleClick }
+        disabled={ isDisabled }
         data-testid="customer_products__button-cart"
       >
         <span data-testid="customer_products__checkout-bottom-value">
