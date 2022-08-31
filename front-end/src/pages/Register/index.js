@@ -44,6 +44,7 @@ export default function Register() {
     try {
       const response = await postRegister(user);
       if (!response) throw Error;
+      localStorage.setItem('user', JSON.stringify(response.data));
       history.push('/customer/products');
     } catch (err) {
       setError(true);

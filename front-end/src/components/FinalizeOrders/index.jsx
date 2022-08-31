@@ -5,15 +5,14 @@ import './FinalizeOrder.css';
 
 export default function FinalizeOrders() {
   const { buyList, totalPrice } = useContext(Context);
-  const onHandleSubmit = () => {
-    //
-  };
 
   return (
     <div>
       <h2>Finalizar Pedido</h2>
       <div className="container-finalize-order">
-        <div className="container-finalize-order-title">
+        <div
+          className="container-finalize-order-title"
+        >
           <span>Item</span>
           <span>Descrição</span>
           <span>Quantidade</span>
@@ -35,9 +34,11 @@ export default function FinalizeOrders() {
             className="btn-total-value"
             data-testid="customer_checkout__element-order-total-price"
             type="button"
-            onClick={ () => onHandleSubmit() }
           >
-            {`totalPrice ${totalPrice}`}
+            {`totalPrice ${Number(totalPrice).toLocaleString('pt-BR', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}`}
           </button>
         </div>
       </div>
