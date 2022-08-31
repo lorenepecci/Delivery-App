@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../../context/Context';
 
-const axios = require('axios');
+// const axios = require('axios');
 
 function ProductCard({ product, index }) {
   const { buyList, setBuyList, setTotalPrice } = useContext(Context);
@@ -78,11 +78,11 @@ function ProductCard({ product, index }) {
     }
   };
 
-/*   const func = async (url) => {
-    const response = await axios(url, { responseType: 'arraybuffer' });
-    const buffer64 = Buffer.from(response.data, 'binary').toString('base64');
-    return buffer64;
-  }; */
+  // const func = async (url) => {
+  //   const response = await axios(url, { responseType: 'arraybuffer' });
+  //   const buffer64 = Buffer.from(response.data, 'binary').toString('base64');
+  //   return buffer64;
+  // };
 
   return (
     <section className="product-card">
