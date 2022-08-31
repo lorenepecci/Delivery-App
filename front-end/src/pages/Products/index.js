@@ -8,24 +8,49 @@ import './Products.css';
 
 export default function Products() {
   const history = useHistory();
+
   const [products, setProducts] = useState([]);
-  const { totalPrice, setBuyList } = useContext(Context);
+
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    role: '',
+    token: '',
+  });
+
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  const { totalPrice } = useContext(Context);
 
   useEffect(() => {
     const getProducts = async () => {
       const result = await getAllProducts();
+      console.log('products', result.data.products);
       setProducts(result.data.products);
     };
     getProducts();
+    const userInfo = JSON.parse(localStorage.getItem('user'));
+    if (userInfo) setUser(userInfo);
   }, []);
 
-  const MAX_LENGTH = 11;
+  useEffect(() => {
+    const validadeCheckout = () => {
+      if (totalPrice > 0) {
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+    };
+    validadeCheckout();
+  }, [totalPrice]);
 
   const onHandleClick = () => {
     const get = JSON.parse(localStorage.getItem('buysList'));
     setBuyList(get);
     history.push('/customer/checkout');
   };
+
+  const MAX_LENGTH = 11;
 
   // const products = [{
   //   id: 1,
@@ -41,24 +66,31 @@ export default function Products() {
 
   return (
     <div className="products-container">
-      <Navbar />
+      <Navbar name={ user.name } />
       {
         products.length > 0
           ? products.filter((_el, i) => i < MAX_LENGTH).map((product, i) => (
             <ProductCard
               key={ i }
               product={ product }
-              data-testid={ `customer_products__element-card-price-${i + 1}` }
+              index={ i + 1 }
             />
           ))
           : null
       }
       <button
-        className="button-products"
         type="button"
+        className="button-products"
         onClick={ onHandleClick }
+        disabled={ isDisabled }
+        data-testid="customer_products__button-cart"
       >
-        { `Ver Carrinho: R$ ${totalPrice}` }
+        <span data-testid="customer_products__checkout-bottom-value">
+          { `Ver Carrinho: R$ ${Number(totalPrice).toLocaleString('pt-BR', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}` }
+        </span>
       </button>
     </div>
   );
