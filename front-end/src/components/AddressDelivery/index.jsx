@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Context from '../../context/Context';
 import { getUsersSellers, postSalesCheckout } from '../../services/api';
 import './AddressDelivery.css';
 
 export default function AddressDelivery() {
+  const history = useHistory();
   const [userAddress, setUserAddress] = useState({
     address: '',
     number: 0,
@@ -36,13 +38,15 @@ export default function AddressDelivery() {
 
   const onHandleSubmit = async () => {
     try {
-      await postSalesCheckout({
+      const response = await postSalesCheckout({
         totalPrice: Number(totalPrice),
         deliveryAddress: userAddress.address,
         deliveryNumber: userAddress.number,
         sellerId: userAddress.seller,
         products: buyList.map((item) => ({ id: item.id, quantity: item.quantity })),
       });
+      console.log(response);
+      history.push(`/customer/orders/${response.data.saleId}`);
     } catch (erro) {
       console.log(erro, 'checkout erro');
     }

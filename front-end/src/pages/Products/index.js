@@ -45,8 +45,6 @@ export default function Products() {
   }, [totalPrice]);
 
   const onHandleClick = () => {
-    const get = JSON.parse(localStorage.getItem('buysList'));
-    setBuyList(get);
     history.push('/customer/checkout');
   };
 

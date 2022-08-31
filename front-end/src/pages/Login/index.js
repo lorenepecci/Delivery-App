@@ -40,10 +40,15 @@ export default function Login() {
       const response = await postLogin(user);
       if (!response) throw Error;
       localStorage.setItem('user', JSON.stringify(response.data));
-      if (response.role === 'seller') {
+      console.log(response);
+      if (response.data.role === 'seller') {
         history.push('/seller/orders');
+      } else if (response.data.role === 'administrator') {
+        history.push('/admin/manage');
+      } else {
+        history.push('/customer/products');
       }
-      history.push('/customer/products');
+      // history.push('/customer/products');
     } catch (err) {
       setError(true);
       console.log('login error', err);
