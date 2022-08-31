@@ -100,7 +100,7 @@ function ProductCard({ product, index }) {
         +
       </button>
       <input
-        type="number"
+        type="text"
         onChange={ handleChange }
         value={ productQnt }
         data-testid={ `customer_products__input-card-quantity-${index}` }
@@ -118,11 +118,11 @@ function ProductCard({ product, index }) {
 
 ProductCard.propTypes = {
   product: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    urlImage: PropTypes.string.isRequired,
-    quantity: PropTypes.number.isRequired,
+    id: PropTypes.number,
+    name: PropTypes.string,
+    price: PropTypes.string,
+    urlImage: PropTypes.string,
+    quantity: PropTypes.number,
   }).isRequired,
   index: PropTypes.number.isRequired,
 };

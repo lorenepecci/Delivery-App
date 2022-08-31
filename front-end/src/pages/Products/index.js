@@ -69,11 +69,14 @@ export default function Products() {
         type="button"
         className="button-products"
         onClick={ onHandleClick }
+        data-testid="customer_products__button-cart"
       >
-        { `Ver Carrinho: R$ ${Number(totalPrice).toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}` }
+        <span data-testid="customer_products__checkout-bottom-value">
+          { `Ver Carrinho: R$ ${Number(totalPrice).toLocaleString('pt-BR', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}` }
+        </span>
       </button>
     </div>
   );
