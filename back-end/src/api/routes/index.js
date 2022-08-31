@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const registerController = require('../controllers/register.controller');
 const loginController = require('../controllers/login.controller');
 const productsController = require('../controllers/products.controller');
@@ -8,6 +9,8 @@ const userController = require('../controllers/user.controller');
 
 const routers = express.Router();
 
+const pathUrl = path.join(__dirname, '..', '..', '..', '..', 'assets', 'images', 'public');
+routers.use('/images', express.static(pathUrl));
 routers.use('/register', registerController);
 routers.use('/login', loginController);
 routers.use('/products', productsController);

@@ -5,21 +5,24 @@ import Context from './Context';
 function Provider({ children }) {
   const [buyList, setBuyList] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [listOrders, setListOrders] = useState([]);
+  const [salesOrders, setSalesOrders] = useState([]);
 
   useEffect(() => {
+    console.log('ativou');
     localStorage.setItem('buysList', JSON.stringify(buyList));
   }, [setBuyList, buyList]);
-
-  useEffect(() => {
-    setBuyList(JSON.parse(localStorage.getItem('buysList')));
-  }, []);
 
   const contextData = useMemo(() => ({
     buyList,
     setBuyList,
     totalPrice,
     setTotalPrice,
-  }), [buyList, totalPrice]);
+    listOrders,
+    setListOrders,
+    salesOrders,
+    setSalesOrders,
+  }), [buyList, totalPrice, listOrders, salesOrders]);
 
   return (
     <Context.Provider value={ contextData }>

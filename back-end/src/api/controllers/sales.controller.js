@@ -11,7 +11,7 @@ saleRoute.post(
     const { id } = res.locals.payload;
     const saleId = await salesService.create(req.body, id);
 
-    return res.status(200).json({ saleId });
+    return res.status(201).json({ saleId });
   },
 );
 
