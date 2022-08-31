@@ -1,7 +1,10 @@
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 const HttpException = require('./HttpException');
 
-const SECRET = process.env.JWT_SECRET || 'secret';
+const key = fs.readFileSync('./jwt.evaluation.key', 'utf-8');
+
+const SECRET = key;
 // https://datatracker.ietf.org/doc/html/rfc7519#section-4.1
 const jwtConfig = {
   // expiresIn: '15m',

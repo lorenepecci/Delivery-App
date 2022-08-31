@@ -2,7 +2,9 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../../context/Context';
 
-function ProductCard({ product }) {
+// const axios = require('axios');
+
+function ProductCard({ product, index }) {
   const { buyList, setBuyList, setTotalPrice } = useContext(Context);
   const [productQnt, setProductQnt] = useState(0);
 
@@ -76,26 +78,61 @@ function ProductCard({ product }) {
     }
   };
 
+  // const func = async (url) => {
+  //   const response = await axios(url, { responseType: 'arraybuffer' });
+  //   const buffer64 = Buffer.from(response.data, 'binary').toString('base64');
+  //   return buffer64;
+  // };
+
   return (
     <section className="product-card">
-      <div>{ product.price }</div>
-      <img src={ product.urlImage } alt={ product.name } />
-      <div>{ product.name }</div>
-      <button type="button" onClick={ handleAddClick }>+</button>
-      <input type="number" onChange={ handleChange } value={ productQnt } />
-      <button type="button" onClick={ handleRemoveClick }>-</button>
+      <div data-testid={ `customer_products__element-card-price-${index}` }>
+        { Number(product.price).toLocaleString('pt-BR', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+      </div>
+      <img
+        src={ product.urlImage }
+        alt={ product.name }
+        data-testid={ `customer_products__img-card-bg-image-${index}` }
+      />
+      <div data-testid={ `customer_products__element-card-title-${index}` }>
+        { product.name }
+      </div>
+      <button
+        type="button"
+        onClick={ handleAddClick }
+        data-testid={ `customer_products__button-card-add-item-${index}` }
+      >
+        +
+      </button>
+      <input
+        type="text"
+        onChange={ handleChange }
+        value={ productQnt }
+        data-testid={ `customer_products__input-card-quantity-${index}` }
+      />
+      <button
+        type="button"
+        onClick={ handleRemoveClick }
+        data-testid={ `customer_products__button-card-rm-item-${index}` }
+      >
+        -
+      </button>
     </section>
   );
 }
 
 ProductCard.propTypes = {
   product: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    urlImage: PropTypes.string.isRequired,
-    quantity: PropTypes.number.isRequired,
+    id: PropTypes.number,
+    name: PropTypes.string,
+    price: PropTypes.string,
+    urlImage: PropTypes.string,
+    quantity: PropTypes.number,
   }).isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default ProductCard;
