@@ -7,10 +7,10 @@ import './AddressDelivery.css';
 export default function AddressDelivery() {
   const history = useHistory();
   const [isDisabled, setIsDisabled] = useState(true);
+  const [sellerSelected, setSellerSelected] = useState({ id: 2, name: '' });
   const [userAddress, setUserAddress] = useState({
     address: '',
     number: 0,
-    seller: 2,
   });
   const [listSellers, setListSellers] = useState([]);
   const { buyList, totalPrice } = useContext(Context);
@@ -30,6 +30,10 @@ export default function AddressDelivery() {
 
   const handleChange = ({ target }) => {
     const { id, value } = target;
+    console.log(id, value, 'idvalue');
+    if (id === 'seller') {
+      setSellerSelected({ id: value });
+    }
     setUserAddress((prevState) => ({
       ...prevState,
       [id]: value,
@@ -39,10 +43,11 @@ export default function AddressDelivery() {
   useEffect(() => {
     const func = async () => {
       try {
-        console.log('try checkout');
         const response = await getUsersSellers();
-        console.log(response);
-        setListSellers(response);
+        // setListSellers(response);
+        setListSellers([...response,
+          { id: 3, name: 'Fulanahj Pereira', role: 'seller' }]);
+        console.log(listSellers, 'listttttttttt');
       } catch (erro) {
         console.log(erro, 'checkout erro');
       }
@@ -52,14 +57,27 @@ export default function AddressDelivery() {
 
   const onHandleSubmit = async () => {
     try {
+      console.log(
+        'totalPrice:',
+        Number(totalPrice),
+        'deliveryAddress:',
+        userAddress.address,
+        'deliveryNumber: ',
+        `${parseInt(userAddress.number, 10)}`,
+        'sellerId: ',
+        Number(sellerSelected.id),
+        ' products:',
+        buyList.map((item) => ({ id: item.id, quantity: item.quantity })),
+      );
+      console.log(typeof totalPrice, typeof sellerSelected.id, sellerSelected.id);
       const response = await postSalesCheckout({
         totalPrice: Number(totalPrice),
         deliveryAddress: userAddress.address,
-        deliveryNumber: parseInt(userAddress.number, 10),
-        sellerId: userAddress.seller,
+        deliveryNumber: `${parseInt(userAddress.number, 10)}`,
+        sellerId: Number(sellerSelected.id),
         products: buyList.map((item) => ({ id: item.id, quantity: item.quantity })),
       });
-      console.log(response);
+      console.log(response, 'post checkout');
       history.push(`/customer/orders/${response.data.saleId}`);
     } catch (erro) {
       console.log(erro, 'checkout erro');
@@ -80,7 +98,12 @@ export default function AddressDelivery() {
               onChange={ (e) => handleChange(e) }
             >
               { listSellers.length && listSellers.map((item, index) => (
-                <option key={ index } value={ item.id }>{item.name}</option>
+                <option
+                  key={ index }
+                  value={ item.id }
+                >
+                  { item.name }
+                </option>
               ))}
             </select>
           </label>

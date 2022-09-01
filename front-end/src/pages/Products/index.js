@@ -25,7 +25,6 @@ export default function Products() {
   useEffect(() => {
     const getProducts = async () => {
       const result = await getAllProducts();
-      console.log('products', result.data.products);
       setProducts(result.data.products);
     };
     getProducts();
