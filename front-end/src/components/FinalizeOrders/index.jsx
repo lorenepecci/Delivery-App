@@ -23,6 +23,7 @@ export default function FinalizeOrders() {
         {
           buyList.map((order, i) => (
             <OrderCard
+              data-testid={ `customer_checkout__element-order-id-${index}` }
               key={ i }
               index={ i }
               order={ order }

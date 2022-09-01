@@ -1,10 +1,12 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import Context from '../../context/Context';
 import './style.css';
 
 export default function Navbar({ name }) {
   const history = useHistory();
+  const { setUserData } = useContext(Context);
 
   return (
     <header>
@@ -32,6 +34,7 @@ export default function Navbar({ name }) {
           type="button"
           onClick={ () => {
             localStorage.removeItem('user');
+            setUserData(null);
             const userInfo = JSON.parse(localStorage.getItem('user'));
             if (!userInfo) history.push('/login');
           } }

@@ -39,11 +39,13 @@ export default function Register() {
       [id]: value,
     }));
   };
+
   const onHandleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await postRegister(user);
       if (!response) throw Error;
+      console.log('reg', response.data);
       localStorage.setItem('user', JSON.stringify(response.data));
       history.push('/customer/products');
     } catch (err) {

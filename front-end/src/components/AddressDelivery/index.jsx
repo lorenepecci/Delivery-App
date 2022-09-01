@@ -6,6 +6,7 @@ import './AddressDelivery.css';
 
 export default function AddressDelivery() {
   const history = useHistory();
+  const [isDisabled, setIsDisabled] = useState(true);
   const [userAddress, setUserAddress] = useState({
     address: '',
     number: 0,
@@ -13,6 +14,19 @@ export default function AddressDelivery() {
   });
   const [listSellers, setListSellers] = useState([]);
   const { buyList, totalPrice } = useContext(Context);
+
+  useEffect(() => {
+    const validadeForm = () => {
+      const { address, number } = userAddress;
+      if (address.length
+        && number !== 0) {
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+    };
+    validadeForm();
+  }, [userAddress, setUserAddress]);
 
   const handleChange = ({ target }) => {
     const { id, value } = target;
@@ -57,19 +71,25 @@ export default function AddressDelivery() {
       <h2>Detalhes e Endereço para Entrega</h2>
       <div className="container-address-delivery">
         <form>
-          <label htmlFor="seller">
-            <p>P.Vendedora Responsável:</p>
-            <select
-              className="seller"
-              data-testid="customer_checkout__select-seller"
-              id="seller"
-              onChange={ (e) => handleChange(e) }
-            >
-              { listSellers.length && listSellers.map((item, index) => (
-                <option key={ index } value={ item.id }>{item.name}</option>
-              ))}
-            </select>
-          </label>
+
+          <p> P.Vendedora Responsável:</p>
+          <select
+            data-testid="customer_checkout__select-seller"
+            className="seller"
+            id="seller"
+            onChange={ (e) => handleChange(e) }
+          >
+            { listSellers.length && listSellers.map((item, index) => (
+              <option
+                key={ index }
+                value={ item.id }
+              >
+                { item.name }
+
+              </option>
+            ))}
+          </select>
+
           <label htmlFor="address" className="address">
             <p>Endereço</p>
             <input
@@ -95,9 +115,10 @@ export default function AddressDelivery() {
         </form>
         <div className="container-button">
           <button
-            className="btn-finalizar"
+            className={ `btn-finalizar ${isDisabled ? 'disabled' : 'notDisabled'}` }
             data-testid="customer_checkout__button-submit-order"
             type="button"
+            disabled={ isDisabled }
             onClick={ onHandleSubmit }
           >
             FINALIZAR PEDIDO

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Context from '../../context/Context';
 import { postLogin } from '../../services/api';
 import './Login.css';
 
@@ -11,6 +12,23 @@ export default function Login() {
     email: '',
     password: '',
   });
+  const { setUserData } = useContext(Context);
+
+  const redirectUser = (role) => {
+    if (role === 'seller') {
+      history.push('/seller/orders');
+    } else if (role === 'administrator') {
+      history.push('/admin/manage');
+    } else {
+      history.push('/customer/products');
+    }
+  };
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem('user'));
+    if (userInfo) {
+      redirectUser(userInfo.role);
+    }
+  }, []);
 
   useEffect(() => {
     const validadeForm = () => {
@@ -39,16 +57,10 @@ export default function Login() {
     try {
       const response = await postLogin(user);
       if (!response) throw Error;
+      setUserData(response.data);
       localStorage.setItem('user', JSON.stringify(response.data));
       console.log(response);
-      if (response.data.role === 'seller') {
-        history.push('/seller/orders');
-      } else if (response.data.role === 'administrator') {
-        history.push('/admin/manage');
-      } else {
-        history.push('/customer/products');
-      }
-      // history.push('/customer/products');
+      redirectUser(response.data.role);
     } catch (err) {
       setError(true);
       console.log('login error', err);
@@ -82,14 +94,13 @@ export default function Login() {
         />
       </label>
       <button
-        className="btn-login"
+        className={ `btn-login ${isDisabled ? 'disabled' : 'notDisabled'}` }
         data-testid="common_login__button-login"
         type="button"
         onClick={ (e) => onHandleSubmit(e) }
         disabled={ isDisabled }
       >
         LOGIN
-
       </button>
 
       <button

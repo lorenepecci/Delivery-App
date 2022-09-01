@@ -7,6 +7,7 @@ function Provider({ children }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [listOrders, setListOrders] = useState([]);
   const [salesOrders, setSalesOrders] = useState([]);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     console.log('ativou');
@@ -14,6 +15,8 @@ function Provider({ children }) {
   }, [setBuyList, buyList]);
 
   const contextData = useMemo(() => ({
+    userData,
+    setUserData,
     buyList,
     setBuyList,
     totalPrice,
@@ -22,7 +25,7 @@ function Provider({ children }) {
     setListOrders,
     salesOrders,
     setSalesOrders,
-  }), [buyList, totalPrice, listOrders, salesOrders]);
+  }), [buyList, totalPrice, listOrders, salesOrders, userData]);
 
   return (
     <Context.Provider value={ contextData }>

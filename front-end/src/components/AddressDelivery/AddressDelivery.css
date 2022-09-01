@@ -45,3 +45,11 @@ label {
   padding: 10px;
 }
 
+.disabled {
+  background-color: rgb(84, 104, 121);
+  color: rgb(201, 224, 224);
+}
+
+.notDisabled {
+  background-color: rgb(6, 131, 93);
+}
