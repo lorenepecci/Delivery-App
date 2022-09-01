@@ -29,7 +29,7 @@ export default function FinalizeOrders() {
             />
           ))
         }
-        <div className="container-button">
+        <div className="container-button-total">
           <button
             className="btn-total-value"
             data-testid="customer_checkout__element-order-total-price"

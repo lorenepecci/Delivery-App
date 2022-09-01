@@ -6,6 +6,7 @@ import './AddressDelivery.css';
 
 export default function AddressDelivery() {
   const history = useHistory();
+  const [isDisabled, setIsDisabled] = useState(true);
   const [userAddress, setUserAddress] = useState({
     address: '',
     number: 0,
@@ -36,6 +37,17 @@ export default function AddressDelivery() {
     func();
   }, []);
 
+  useEffect(() => {
+    const { address,
+      number } = userAddress;
+    if (address.length && number > 0
+    && Number(totalPrice) > 0) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [userAddress, setUserAddress]);
+
   const onHandleSubmit = async () => {
     try {
       const response = await postSalesCheckout({
@@ -57,7 +69,7 @@ export default function AddressDelivery() {
       <h2>Detalhes e Endereço para Entrega</h2>
       <div className="container-address-delivery">
         <form>
-          <label htmlFor="seller">
+          <label htmlFor="seller" className="label-address">
             <p>P.Vendedora Responsável:</p>
             <select
               className="seller"
@@ -81,7 +93,7 @@ export default function AddressDelivery() {
               placeholder="Travessa Terceira da Castanheira, Bairro Muruci"
             />
           </label>
-          <label htmlFor="number">
+          <label htmlFor="number" className="label-address">
             <p>Número</p>
             <input
               data-testid="customer_checkout__input-addressNumber"
@@ -95,10 +107,11 @@ export default function AddressDelivery() {
         </form>
         <div className="container-button">
           <button
-            className="btn-finalizar"
+            className={ `btn-finalizar ${isDisabled ? 'disabled' : 'notDisabled'}` }
             data-testid="customer_checkout__button-submit-order"
             type="button"
             onClick={ onHandleSubmit }
+            disabled={ isDisabled }
           >
             FINALIZAR PEDIDO
           </button>
