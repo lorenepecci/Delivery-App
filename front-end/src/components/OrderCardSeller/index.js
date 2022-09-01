@@ -5,6 +5,14 @@ import './OrderCardCustomer.css';
 
 export default function OrderCardSeller({ order }) {
   const history = useHistory();
+
+  const dataAtualFormatada = (dateString) => {
+    const data = new Date(dateString);
+    const dia = data.getDate().toString().padStart(2, '0');
+    const mes = (data.getMonth() + 1).toString().padStart(2, '0');
+    const ano = data.getFullYear(); return `${dia}/${mes}/${ano}`;
+  };
+
   return (
     <>
       {console.log(order.saleDate, 'dateeeeeeeeeeeeeee')}
@@ -36,15 +44,16 @@ export default function OrderCardSeller({ order }) {
             data-testid={ `seller_orders__element-order-date-${order.id}` }
             className="order-card-customer-data"
           >
-            { `${new Date(order.saleDate).getUTCDate()}
-            / ${new Date(order.saleDate).getMonth()}
-            / ${new Date(order.saleDate).getFullYear()}` }
+            {dataAtualFormatada(order.saleDate) }
           </div>
           <div
             data-testid={ `seller_orders__element-card-price-${order.id}` }
             className="order-card-customer-total"
           >
-            {order.totalPrice}
+            {Number(order.totalPrice).toLocaleString('pt-BR', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           </div>
 
         </div>
