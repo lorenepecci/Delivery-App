@@ -6,6 +6,7 @@ import Orders from '../pages/Orders';
 import Products from '../pages/Products';
 import Register from '../pages/Register';
 import SellerOrders from '../pages/SellerOrders';
+import AdminManage from '../pages/AdminManage';
 
 function Routes() {
   return (
@@ -20,7 +21,7 @@ function Routes() {
         <Route exact path="/customer/checkout" component={ Checkout } />
         <Route exact path="/customer/orders" component={ Orders } />
         <Route exact path="/seller/orders" component={ SellerOrders } />
-        {/* <Route exact path="//admin/manage" component={ AdminManage } /> */}
+        <Route exact path="/admin/manage" component={ AdminManage } />
       </Switch>
     </BrowserRouter>
   );
