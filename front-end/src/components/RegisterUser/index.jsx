@@ -4,6 +4,7 @@ import './RegisterUser.css';
 
 export default function RegisterUser() {
   const [isDisabled, setIsDisabled] = useState(true);
+  const [error, setError] = useState(false);
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -21,7 +22,12 @@ export default function RegisterUser() {
   };
 
   const handleClick = async () => {
-    await postRegisterUserByAdmin(user);
+    try {
+      const response = await postRegisterUserByAdmin(user);
+      if (!response) throw Error;
+    } catch (err) {
+      setError(true);
+    }
   };
 
   useEffect(() => {
@@ -81,7 +87,7 @@ export default function RegisterUser() {
           <p>Tipo</p>
           <select
             className="role"
-            data-testid="customer_checkout__select-seller"
+            data-testid="admin_manage__select-role"
             id="seller"
             name="role"
             onChange={ handleChange }
@@ -102,6 +108,11 @@ export default function RegisterUser() {
           >
             CADASTRAR
           </button>
+
+          { error ? (
+            <span data-testid="admin_manage__element-invalid-register">
+              Error
+            </span>) : null }
         </div>
       </div>
     </div>
