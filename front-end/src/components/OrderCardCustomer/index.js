@@ -11,49 +11,48 @@ export default function OrderCardCustomer({ order }) {
       type="button"
       onClick={ () => history.push(`orders/${order.id}`) }
     >
-      <div className="order-card-customer-container">
-        <div className="order-card-customer-middle">
-          <div
-            data-testid={ `seller_orders__element-order-id-${order.id}` }
-            className="order-card-customer-pedido"
-          >
-            <p>Pedido</p>
-            {`000${order.id}`}
-          </div>
 
-          <div className="order-card-customer-status">
-            <p
-              data-testid={ `seller_orders__element-delivery-status-${order.id}` }
-              className="p-status"
-            >
-              {order.status}
-            </p>
-          </div>
-          <div className="order-card-customer-dataTotal">
-            <div
-              data-testid={ `seller_orders__element-order-date-${order.id}` }
-              className="order-card-customer-data"
-            >
-              { `${new Date(order.saleDate).getUTCDate()}
+      <div
+        data-testid={ `seller_orders__element-order-id-${order.id}` }
+        className="order-card-customer-pedido"
+      >
+        <p>Pedido</p>
+        {`000${order.id}`}
+      </div>
+
+      <div className="order-card-customer-status">
+        <p
+          data-testid={ `seller_orders__element-delivery-status-${order.id}` }
+          className="p-status"
+        >
+          {order.status}
+        </p>
+      </div>
+      <div className="order-card-customer-dataTotal">
+        <div
+          data-testid={ `seller_orders__element-order-date-${order.id}` }
+          className="order-card-customer-data"
+        >
+          { `${new Date(order.saleDate).getUTCDate()}
             / ${new Date(order.saleDate).getMonth()}
             / ${new Date(order.saleDate).getYear()}` }
-            </div>
-            <div
-              data-testid={ `seller_orders__element-card-price-${order.id}` }
-              className="order-card-customer-total"
-            >
-              {order.totalPrice}
-            </div>
-
-          </div>
         </div>
         <div
-          data-testid={ `seller_orders__element-card-address-${order.id}` }
-          className="order-card-address"
+          data-testid={ `seller_orders__element-card-price-${order.id}` }
+          className="order-card-customer-total"
         >
-          {order.deliveryAddress}
+          {order.totalPrice}
         </div>
+
       </div>
+
+      <div
+        data-testid={ `seller_orders__element-card-address-${order.id}` }
+        className="order-card-address"
+      >
+        {order.deliveryAddress}
+      </div>
+
     </button>
   );
 }

@@ -6,34 +6,16 @@ import './AddressDelivery.css';
 
 export default function AddressDelivery() {
   const history = useHistory();
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [sellerSelected, setSellerSelected] = useState({ id: 2, name: '' });
   const [userAddress, setUserAddress] = useState({
     address: '',
     number: 0,
+    seller: 2,
   });
   const [listSellers, setListSellers] = useState([]);
   const { buyList, totalPrice } = useContext(Context);
 
-  useEffect(() => {
-    const validadeForm = () => {
-      const { address, number } = userAddress;
-      if (address.length
-        && number !== 0) {
-        setIsDisabled(false);
-      } else {
-        setIsDisabled(true);
-      }
-    };
-    validadeForm();
-  }, [userAddress, setUserAddress]);
-
   const handleChange = ({ target }) => {
     const { id, value } = target;
-    console.log(id, value, 'idvalue');
-    if (id === 'seller') {
-      setSellerSelected({ id: value });
-    }
     setUserAddress((prevState) => ({
       ...prevState,
       [id]: value,
@@ -43,11 +25,10 @@ export default function AddressDelivery() {
   useEffect(() => {
     const func = async () => {
       try {
+        console.log('try checkout');
         const response = await getUsersSellers();
-        // setListSellers(response);
-        setListSellers([...response,
-          { id: 3, name: 'Fulanahj Pereira', role: 'seller' }]);
-        console.log(listSellers, 'listttttttttt');
+        console.log(response);
+        setListSellers(response);
       } catch (erro) {
         console.log(erro, 'checkout erro');
       }
@@ -57,27 +38,14 @@ export default function AddressDelivery() {
 
   const onHandleSubmit = async () => {
     try {
-      console.log(
-        'totalPrice:',
-        Number(totalPrice),
-        'deliveryAddress:',
-        userAddress.address,
-        'deliveryNumber: ',
-        `${parseInt(userAddress.number, 10)}`,
-        'sellerId: ',
-        Number(sellerSelected.id),
-        ' products:',
-        buyList.map((item) => ({ id: item.id, quantity: item.quantity })),
-      );
-      console.log(typeof totalPrice, typeof sellerSelected.id, sellerSelected.id);
       const response = await postSalesCheckout({
         totalPrice: Number(totalPrice),
         deliveryAddress: userAddress.address,
-        deliveryNumber: `${parseInt(userAddress.number, 10)}`,
-        sellerId: Number(sellerSelected.id),
+        deliveryNumber: parseInt(userAddress.number, 10),
+        sellerId: userAddress.seller,
         products: buyList.map((item) => ({ id: item.id, quantity: item.quantity })),
       });
-      console.log(response, 'post checkout');
+      console.log(response);
       history.push(`/customer/orders/${response.data.saleId}`);
     } catch (erro) {
       console.log(erro, 'checkout erro');
@@ -98,12 +66,7 @@ export default function AddressDelivery() {
               onChange={ (e) => handleChange(e) }
             >
               { listSellers.length && listSellers.map((item, index) => (
-                <option
-                  key={ index }
-                  value={ item.id }
-                >
-                  { item.name }
-                </option>
+                <option key={ index } value={ item.id }>{item.name}</option>
               ))}
             </select>
           </label>
@@ -132,10 +95,9 @@ export default function AddressDelivery() {
         </form>
         <div className="container-button">
           <button
-            className={ `btn-finalizar ${isDisabled ? 'disabled' : 'notDisabled'}` }
+            className="btn-finalizar"
             data-testid="customer_checkout__button-submit-order"
             type="button"
-            disabled={ isDisabled }
             onClick={ onHandleSubmit }
           >
             FINALIZAR PEDIDO

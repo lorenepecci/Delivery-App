@@ -55,7 +55,7 @@ export default function Register() {
   };
 
   return (
-    <form className="form-login">
+    <form className="form-register">
       <label htmlFor="name">
         <p>Nome:</p>
         <input
