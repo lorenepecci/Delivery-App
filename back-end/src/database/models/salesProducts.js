@@ -16,7 +16,7 @@ const SalesProductsSchema = (sequelize, DataTypes) =>{
     underscored: true,
 
     //  TO DO: Verificar se o teste procura por tabela com esse nome ou com underline (sales_products)
-    tableName: "salesproducts"
+    tableName: "sales_products"
   })
 
   SalesProductsTable.associate = (models) => {
