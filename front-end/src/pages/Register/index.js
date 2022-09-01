@@ -24,7 +24,6 @@ export default function Register() {
         && name.length > minNameLenght) {
         setIsDisabled(false);
       } else {
-        console.log('else', name.length, email, password);
         setIsDisabled(true);
       }
     };
@@ -56,7 +55,7 @@ export default function Register() {
 
   return (
     <form className="form-register">
-      <label htmlFor="name">
+      <label htmlFor="name" className="register-label">
         <p>Nome:</p>
         <input
           data-testid="common_register__input-name"
@@ -67,7 +66,7 @@ export default function Register() {
           placeholder="Seu nome"
         />
       </label>
-      <label htmlFor="email">
+      <label htmlFor="email" className="register-label">
         <p>Email:</p>
         <input
           data-testid="common_register__input-email"
@@ -78,7 +77,7 @@ export default function Register() {
           placeholder="email@trybeer.com.br"
         />
       </label>
-      <label htmlFor="password">
+      <label htmlFor="password" className="login-label">
         <p>Senha:</p>
         <input
           data-testid="common_register__input-password"

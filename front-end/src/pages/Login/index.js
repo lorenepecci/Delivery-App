@@ -71,7 +71,7 @@ export default function Login() {
 
   return (
     <form className="form-login">
-      <label htmlFor="email">
+      <label htmlFor="email" className="login-label">
         <p>Login:</p>
         <input
           data-testid="common_login__input-email"
@@ -82,7 +82,7 @@ export default function Login() {
           placeholder="email@trybeer.com.br"
         />
       </label>
-      <label htmlFor="password">
+      <label htmlFor="password" className="login-label">
         <p>Senha:</p>
         <input
           data-testid="common_login__input-password"

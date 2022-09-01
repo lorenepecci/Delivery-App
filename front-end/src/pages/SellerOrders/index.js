@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Navbar from '../../components/Navbar';
-import OrderCardCustomer from '../../components/OrderCardCustomer';
+import OrderCardSeller from '../../components/OrderCardSeller';
 import Context from '../../context/Context';
 import { getOrdersSeller } from '../../services/api';
 import './SellerOrders.css';
@@ -29,7 +29,7 @@ export default function SellerOrders() {
         { salesOrders.length
           ? salesOrders.map((item, i) => (
             <div key={ i }>
-              <OrderCardCustomer order={ item } />
+              <OrderCardSeller order={ item } />
             </div>
           ))
           : null }

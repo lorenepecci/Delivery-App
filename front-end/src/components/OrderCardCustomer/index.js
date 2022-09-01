@@ -11,9 +11,9 @@ export default function OrderCardCustomer({ order }) {
       type="button"
       onClick={ () => history.push(`orders/${order.id}`) }
     >
-
+      {console.log(order.saleDate, 'dateeeeeeeeeeeeeee')}
       <div
-        data-testid={ `seller_orders__element-order-id-${order.id}` }
+        data-testid={ `customer_orders__element-order-id-${order.id}` }
         className="order-card-customer-pedido"
       >
         <p>Pedido</p>
@@ -22,7 +22,7 @@ export default function OrderCardCustomer({ order }) {
 
       <div className="order-card-customer-status">
         <p
-          data-testid={ `seller_orders__element-delivery-status-${order.id}` }
+          data-testid={ `customer_orders__element-delivery-status-${order.id}` }
           className="p-status"
         >
           {order.status}
@@ -30,7 +30,7 @@ export default function OrderCardCustomer({ order }) {
       </div>
       <div className="order-card-customer-dataTotal">
         <div
-          data-testid={ `seller_orders__element-order-date-${order.id}` }
+          data-testid={ `customer_orders__element-order-date-${order.id}` }
           className="order-card-customer-data"
         >
           { `${new Date(order.saleDate).getUTCDate()}
@@ -38,7 +38,7 @@ export default function OrderCardCustomer({ order }) {
             / ${new Date(order.saleDate).getYear()}` }
         </div>
         <div
-          data-testid={ `seller_orders__element-card-price-${order.id}` }
+          data-testid={ `customer_orders__element-card-price-${order.id}` }
           className="order-card-customer-total"
         >
           {order.totalPrice}
@@ -47,7 +47,7 @@ export default function OrderCardCustomer({ order }) {
       </div>
 
       <div
-        data-testid={ `seller_orders__element-card-address-${order.id}` }
+        data-testid={ `customer_orders__element-card-address-${order.id}` }
         className="order-card-address"
       >
         {order.deliveryAddress}

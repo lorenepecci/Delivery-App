@@ -17,6 +17,10 @@ label {
   text-align: left;
 }
 
+.register-label {
+  width: 80%;
+}
+
 p {
   color: black;
   margin: 0;
