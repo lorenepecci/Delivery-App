@@ -71,25 +71,19 @@ export default function AddressDelivery() {
       <h2>Detalhes e Endereço para Entrega</h2>
       <div className="container-address-delivery">
         <form>
-
-          <p> P.Vendedora Responsável:</p>
-          <select
-            data-testid="customer_checkout__select-seller"
-            className="seller"
-            id="seller"
-            onChange={ (e) => handleChange(e) }
-          >
-            { listSellers.length && listSellers.map((item, index) => (
-              <option
-                key={ index }
-                value={ item.id }
-              >
-                { item.name }
-
-              </option>
-            ))}
-          </select>
-
+          <label htmlFor="seller">
+            <p>P.Vendedora Responsável:</p>
+            <select
+              className="seller"
+              data-testid="customer_checkout__select-seller"
+              id="seller"
+              onChange={ (e) => handleChange(e) }
+            >
+              { listSellers.length && listSellers.map((item, index) => (
+                <option key={ index } value={ item.id }>{item.name}</option>
+              ))}
+            </select>
+          </label>
           <label htmlFor="address" className="address">
             <p>Endereço</p>
             <input
