@@ -103,6 +103,21 @@ const postRegisterUserByAdmin = async (body) => {
   }
 };
 
+const updateOrdersCustomer = async (payload) => {
+  const { id, status } = payload;
+  try {
+    const user = JSON.parse(localStorage.getItem(('user')));
+    const instanceToken = axios.create({
+      baseURL: URL,
+      headers: { authorization: user.token },
+    });
+    const r = await instanceToken.patch(`/sales/customer/orders/${id}`, { status });
+    return r;
+  } catch (error) {
+    console.error(error, 'erroapi');
+  }
+};
+
 export {
   postRegister,
   postLogin,
@@ -110,6 +125,7 @@ export {
   getUsersSellers,
   postSalesCheckout,
   getOrdersCustomer,
+  updateOrdersCustomer,
   getOrdersSeller,
   postRegisterUserByAdmin,
 };
