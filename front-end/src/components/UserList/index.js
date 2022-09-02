@@ -68,4 +68,14 @@ function UserList({ handleDeleteClick, users }) {
   );
 }
 
+UserList.propTypes = {
+  handleDeleteClick: PropTypes.func.isRequired,
+  users: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    email: PropTypes.string,
+    role: PropTypes.string,
+  })).isRequired,
+};
+
 export default UserList;
