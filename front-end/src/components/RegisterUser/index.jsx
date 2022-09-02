@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './RegisterUser.css';
 
 export default function RegisterUser({ handleRegisterClick, error }) {
@@ -106,3 +107,8 @@ export default function RegisterUser({ handleRegisterClick, error }) {
     </div>
   );
 }
+
+RegisterUser.propTypes = {
+  handleRegisterClick: PropTypes.func.isRequired,
+  error: PropTypes.bool.isRequired,
+};
