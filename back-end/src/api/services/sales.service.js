@@ -1,5 +1,5 @@
 const { Sale, sequelize } = require('../../database/models');
-const { SalesProduct, User} = require('../../database/models');
+const { SalesProduct, User } = require('../../database/models');
 
 const create = async (saleData, userId) => {
   let createdSale;
