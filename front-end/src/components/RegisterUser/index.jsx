@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { postRegisterUserByAdmin } from '../../services/api';
+import PropTypes from 'prop-types';
 import './RegisterUser.css';
 
-export default function RegisterUser() {
+export default function RegisterUser({ handleRegisterClick, error }) {
   const [isDisabled, setIsDisabled] = useState(true);
-  const [error, setError] = useState(false);
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -21,15 +20,6 @@ export default function RegisterUser() {
     }));
   };
 
-  const handleClick = async () => {
-    try {
-      const response = await postRegisterUserByAdmin(user);
-      if (!response) throw Error;
-    } catch (err) {
-      setError(true);
-    }
-  };
-
   useEffect(() => {
     const validadeForm = () => {
       const { name, email, password } = user;
@@ -38,10 +28,9 @@ export default function RegisterUser() {
       const minNameLenght = 12;
       if (emailRegex.test(email)
         && password.length > minPasswordLenght
-        && name.length > minNameLenght) {
+        && name.length >= minNameLenght) {
         setIsDisabled(false);
       } else {
-        console.log('else', name.length, email, password);
         setIsDisabled(true);
       }
     };
@@ -103,7 +92,7 @@ export default function RegisterUser() {
             data-testid="admin_manage__button-register"
             type="button"
             disabled={ isDisabled }
-            onClick={ handleClick }
+            onClick={ () => handleRegisterClick(user) }
             className="btn-cadastrar"
           >
             CADASTRAR
@@ -118,3 +107,8 @@ export default function RegisterUser() {
     </div>
   );
 }
+
+RegisterUser.propTypes = {
+  handleRegisterClick: PropTypes.func.isRequired,
+  error: PropTypes.bool.isRequired,
+};
