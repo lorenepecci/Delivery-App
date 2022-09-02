@@ -1,4 +1,5 @@
 const { User } = require('../../database/models');
+const HttpException = require('../utils/HttpException');
 
 const getSellers = async () => {
   const sellers = await User.findAll(
@@ -19,7 +20,18 @@ const getUsers = async () => {
   return sellers;
 };
 
+const deleteUser = async (id) => {
+  const deletedUser = await User.destroy({ where: { id } });
+
+  if (!deleteUser) {
+    throw new HttpException(404, 'User not found');
+  }
+
+  return deletedUser;
+};
+
 module.exports = {
   getSellers,
   getUsers,
+  deleteUser,
 };
