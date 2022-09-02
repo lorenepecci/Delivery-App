@@ -1,17 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import dataAtualFormatada from '../../helper/convertData';
 import './OrderCardCustomer.css';
 
 export default function OrderCardCustomer({ order }) {
   const history = useHistory();
   const size = 4;
-  const dataAtualFormatada = (dateString) => {
-    const data = new Date(dateString);
-    const dia = data.getDate().toString().padStart(2, '0');
-    const mes = (data.getMonth() + 1).toString().padStart(2, '0');
-    const ano = data.getFullYear(); return `${dia}/${mes}/${ano}`;
-  };
 
   return (
     <button
