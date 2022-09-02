@@ -5,7 +5,7 @@ import './OrderCardCustomer.css';
 
 export default function OrderCardCustomer({ order }) {
   const history = useHistory();
-
+  const size = 4;
   const dataAtualFormatada = (dateString) => {
     const data = new Date(dateString);
     const dia = data.getDate().toString().padStart(2, '0');
@@ -25,7 +25,7 @@ export default function OrderCardCustomer({ order }) {
         className="order-card-customer-pedido"
       >
         <p>Pedido</p>
-        {`000${order.id}`}
+        {`${order.id}`.padStart(size, '0')}
       </div>
 
       <div className="order-card-customer-status">

@@ -6,7 +6,7 @@ import './OrdersDetails.css';
 
 export default function OrdersDetails() {
   const { id } = useParams();
-  const nine = 9;
+  const size = 4;
   return (
     <div className="container-orders-details">
       <Navbar />
@@ -14,7 +14,7 @@ export default function OrdersDetails() {
       <div>
         <span>
           PEDIDO:
-          {id > nine ? `00${id}` : `000${id}`}
+          {id.padStart(size, '0')}
           ;
         </span>
         <span>P.Vend: CICRANA</span>
