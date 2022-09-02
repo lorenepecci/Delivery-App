@@ -17,26 +17,32 @@ export default function OrderCard({ index, order }) {
     setTotalPrice(newSoma.toFixed(2));
   };
 
+  let prefix;
+
+  if (pathname.includes('checkout')) prefix = 'customer_checkout__';
+  else if (pathname.includes('customer/orders')) prefix = 'customer_order_details__';
+  else if (pathname.includes('seller/orders/')) prefix = 'seller_order_details__';
+
   return (
     <div className="order-card-container">
       <span
-        data-testid={ `customer_checkout__element-order-table-item-number-${index}` }
+        data-testid={ `${prefix}element-order-table-item-number-${index}` }
       >
         { index + 1 }
       </span>
-      <span data-testid={ `customer_checkout__element-order-table-name-${index}` }>
+      <span data-testid={ `${prefix}element-order-table-name-${index}` }>
         { order.name }
       </span>
-      <span data-testid={ `customer_checkout__element-order-table-quantity-${index}` }>
+      <span data-testid={ `${prefix}element-order-table-quantity-${index}` }>
         { order.quantity }
       </span>
-      <span data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }>
+      <span data-testid={ `${prefix}element-order-table-unit-price-${index}` }>
         {` ${Number(order.price).toLocaleString('pt-BR', {
           currency: 'BRL',
           style: 'currency',
         })} `}
       </span>
-      <span data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }>
+      <span data-testid={ `${prefix}element-order-table-sub-total-${index}` }>
         {` ${Number((order.quantity * order.price).toFixed(2)).toLocaleString('pt-BR', {
           currency: 'BRL',
           style: 'currency',
@@ -46,7 +52,7 @@ export default function OrderCard({ index, order }) {
         <button
           type="button"
           onClick={ removeItem }
-          data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+          data-testid={ `${prefix}element-order-table-remove-${index}` }
         >
           Remover
         </button>) : null}

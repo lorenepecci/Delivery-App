@@ -7,6 +7,11 @@ import './FinalizeOrder.css';
 export default function FinalizeOrders() {
   const { buyList, totalPrice } = useContext(Context);
   const { location: { pathname } } = useHistory();
+  let prefix;
+
+  if (pathname.includes('checkout')) prefix = 'customer_checkout__';
+  else if (pathname.includes('customer/orders')) prefix = 'customer_order_details__';
+  else if (pathname.includes('seller/orders/')) prefix = 'seller_order_details__';
   return (
     <div>
       <h2>Finalizar Pedido</h2>
@@ -33,7 +38,7 @@ export default function FinalizeOrders() {
         <div className="container-button-total">
           <button
             className="btn-total-value"
-            data-testid="customer_checkout__element-order-total-price"
+            data-testid={ `${prefix}element-order-total-price` }
             type="button"
           >
             {`Total: ${Number(totalPrice).toLocaleString('pt-BR', {
