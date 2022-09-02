@@ -1,5 +1,5 @@
 const { Sale, sequelize } = require('../../database/models');
-const { SalesProduct } = require('../../database/models');
+const { SalesProduct, User} = require('../../database/models');
 
 const create = async (saleData, userId) => {
   let createdSale;
@@ -35,7 +35,12 @@ const getByUser = async (userId) => {
 };
 
 const getById = async (id) => {
-  const sale = await Sale.findOne({ where: { id } });
+  const sale = await Sale.findOne({
+      include: [
+        { model: User, as: 'seller', attributes: { exclude: ['id', 'email', 'password', 'role'] } },
+      ],
+      where: { id },
+    });
 
   if (!sale) {
     throw new Error('Sale not found');
