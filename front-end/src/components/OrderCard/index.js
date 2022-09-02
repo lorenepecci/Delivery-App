@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Context from '../../context/Context';
 import './OrderCard.css';
 
 export default function OrderCard({ index, order }) {
   const { setBuyList, buyList, setTotalPrice } = useContext(Context);
+  const { location: { pathname } } = useHistory();
   const removeItem = () => {
     const newList = buyList.filter((prod) => prod.id !== order.id);
     setBuyList(newList);
@@ -40,13 +42,14 @@ export default function OrderCard({ index, order }) {
           style: 'currency',
         })} `}
       </span>
-      <button
-        type="button"
-        onClick={ removeItem }
-        data-testid={ `customer_checkout__element-order-table-remove-${index}` }
-      >
-        Remover
-      </button>
+      {pathname.includes('checkout') ? (
+        <button
+          type="button"
+          onClick={ removeItem }
+          data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+        >
+          Remover
+        </button>) : null}
     </div>
   );
 }

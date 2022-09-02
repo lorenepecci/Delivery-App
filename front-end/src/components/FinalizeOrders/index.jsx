@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Context from '../../context/Context';
 import OrderCard from '../OrderCard';
 import './FinalizeOrder.css';
 
 export default function FinalizeOrders() {
   const { buyList, totalPrice } = useContext(Context);
-
+  const { location: { pathname } } = useHistory();
   return (
     <div>
       <h2>Finalizar Pedido</h2>
@@ -18,7 +19,7 @@ export default function FinalizeOrders() {
           <span>Quantidade</span>
           <span>Valor Unitário</span>
           <span>Sub-total</span>
-          <span>Remover Item</span>
+          {pathname.includes('checkout') ? <span>Remover Item</span> : null}
         </div>
         {
           buyList.map((order, i) => (
