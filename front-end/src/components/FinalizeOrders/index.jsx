@@ -35,9 +35,9 @@ export default function FinalizeOrders() {
             data-testid="customer_checkout__element-order-total-price"
             type="button"
           >
-            {`totalPrice ${Number(totalPrice).toLocaleString('pt-BR', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
+            {`Total: ${Number(totalPrice).toLocaleString('pt-BR', {
+              currency: 'BRL',
+              style: 'currency',
             })}`}
           </button>
         </div>

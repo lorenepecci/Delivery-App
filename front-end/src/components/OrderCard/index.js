@@ -30,14 +30,14 @@ export default function OrderCard({ index, order }) {
       </span>
       <span data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }>
         {` ${Number(order.price).toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
+          currency: 'BRL',
+          style: 'currency',
         })} `}
       </span>
       <span data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }>
         {` ${Number((order.quantity * order.price).toFixed(2)).toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
+          currency: 'BRL',
+          style: 'currency',
         })} `}
       </span>
       <button

@@ -88,8 +88,8 @@ function ProductCard({ product, index }) {
     <section className="product-card">
       <div data-testid={ `customer_products__element-card-price-${index}` }>
         { Number(product.price).toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
+          currency: 'BRL',
+          style: 'currency',
         })}
       </div>
       <img
