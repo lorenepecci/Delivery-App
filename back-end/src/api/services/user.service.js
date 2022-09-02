@@ -10,6 +10,16 @@ const getSellers = async () => {
   return sellers;
 };
 
+const getUsers = async () => {
+  const sellers = await User.findAll(
+    {
+      attributes: { exclude: ['password'] },
+    },
+    );
+  return sellers;
+};
+
 module.exports = {
   getSellers,
+  getUsers,
 };
