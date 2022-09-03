@@ -14,28 +14,32 @@ export default function OrderCardCustomer({ order }) {
   };
 
   return (
-    <button
+    <div
       className="order-card-customer-container-button"
-      type="button"
       onClick={ () => history.push(`orders/${order.id}`) }
+      onKeyPress={ () => history.push(`orders/${order.id}`) }
+      role="button"
+      tabIndex="0"
     >
-
-      <div
-        data-testid={ `customer_orders__element-order-id-${order.id}` }
-        className="order-card-customer-pedido"
-      >
-        <p>Pedido</p>
-        {`000${order.id}`}
+      <div className="order-card-customer-middle">
+        <div
+          data-testid={ `customer_orders__element-order-id-${order.id}` }
+          className="order-card-customer-pedido"
+        >
+          <p>Pedido</p>
+          {`000${order.id}`}
+        </div>
       </div>
-
       <div className="order-card-customer-status">
         <p
           data-testid={ `customer_orders__element-delivery-status-${order.id}` }
-          className="p-status"
+          className={ `p-status ${order.status === 'Preparando' ? 'preparando' : null}
+          ${order.status === 'Entregue' ? 'entregue' : null}` }
         >
           {order.status}
         </p>
       </div>
+
       <div className="order-card-customer-dataTotal">
         <div
           data-testid={ `customer_orders__element-order-date-${order.id}` }
@@ -47,10 +51,10 @@ export default function OrderCardCustomer({ order }) {
           data-testid={ `customer_orders__element-card-price-${order.id}` }
           className="order-card-customer-total"
         >
-          {Number(order.totalPrice).toLocaleString('pt-BR', {
+          {` R$ ${Number(order.totalPrice).toLocaleString('pt-BR', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-          })}
+          })}`}
         </div>
 
       </div>
@@ -62,7 +66,7 @@ export default function OrderCardCustomer({ order }) {
         {order.deliveryAddress}
       </div>
 
-    </button>
+    </div>
   );
 }
 

@@ -3,3 +3,21 @@
   justify-content: space-between;
   width: 80%;
 }
+
+.button-remove-item {
+  background-color: rgb(6, 131, 93);
+  border: 1px solid black;
+  border-radius: 5px;
+  color: white;
+}
+
+tr {
+  display: flex;
+  justify-content: start;
+  text-align: center;
+}
+
+td {
+  padding: 10px 0;
+  width: 100px;
+}
