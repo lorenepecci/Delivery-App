@@ -1,5 +1,43 @@
 .navbar {
   align-items: center;
+  background: #0fa36b;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.navbar-products {
+  background-color: rgb(94, 219, 146);
+  border-color: transparent;
+  color: white;
+  padding: 10px;
+  width: 100px;
+}
+
+.navbar-out {
+  background-color: rgb(13, 157, 214);
+  border-color: transparent;
+  color: white;
+  padding: 10px;
+  width: 100px;
+}
+
+.navbar-name {
+  background: #0fa36b;
+  border-color: transparent;
+  padding: 10px;
+  width: 200px;
+
+}
+
+.navbar-name p {
+  color: white;
+}
+
+.navbar-my-products {
+  background: #0fa36b;
+  border-color: transparent;
+  color: white;
+  padding: 10px;
+  width: 200px;
 }

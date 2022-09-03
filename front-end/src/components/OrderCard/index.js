@@ -16,38 +16,41 @@ export default function OrderCard({ index, order }) {
   };
 
   return (
-    <div className="order-card-container">
-      <span
+    <tr className="order-card-container">
+      <td
         data-testid={ `customer_checkout__element-order-table-item-number-${index}` }
       >
         { index + 1 }
-      </span>
-      <span data-testid={ `customer_checkout__element-order-table-name-${index}` }>
+      </td>
+      <td data-testid={ `customer_checkout__element-order-table-name-${index}` }>
         { order.name }
-      </span>
-      <span data-testid={ `customer_checkout__element-order-table-quantity-${index}` }>
+      </td>
+      <td data-testid={ `customer_checkout__element-order-table-quantity-${index}` }>
         { order.quantity }
-      </span>
-      <span data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }>
+      </td>
+      <td data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }>
         {` ${Number(order.price).toLocaleString('pt-BR', {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         })} `}
-      </span>
-      <span data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }>
+      </td>
+      <td data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }>
         {` ${Number((order.quantity * order.price).toFixed(2)).toLocaleString('pt-BR', {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         })} `}
-      </span>
-      <button
-        type="button"
-        onClick={ removeItem }
-        data-testid={ `customer_checkout__element-order-table-remove-${index}` }
-      >
-        Remover
-      </button>
-    </div>
+      </td>
+      <td>
+        <button
+          className="button-remove-item"
+          type="button"
+          onClick={ removeItem }
+          data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+        >
+          Remover
+        </button>
+      </td>
+    </tr>
   );
 }
 

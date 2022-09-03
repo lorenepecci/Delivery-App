@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 import Context from '../../context/Context';
+import './style.css';
 
 // const axios = require('axios');
 
@@ -86,40 +87,49 @@ function ProductCard({ product, index }) {
 
   return (
     <section className="product-card">
-      <div data-testid={ `customer_products__element-card-price-${index}` }>
-        { Number(product.price).toLocaleString('pt-BR', {
+      <div
+        className="product-card-price"
+        data-testid={ `customer_products__element-card-price-${index}` }
+      >
+        {`R$ ${Number(product.price).toLocaleString('pt-BR', {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
-        })}
+        })}`}
       </div>
       <img
+        className="product-card-img"
         src={ product.urlImage }
         alt={ product.name }
         data-testid={ `customer_products__img-card-bg-image-${index}` }
       />
-      <div data-testid={ `customer_products__element-card-title-${index}` }>
+      <div
+        className="product-card-name"
+        data-testid={ `customer_products__element-card-title-${index}` }
+      >
         { product.name }
       </div>
-      <button
-        type="button"
-        onClick={ handleAddClick }
-        data-testid={ `customer_products__button-card-add-item-${index}` }
-      >
-        +
-      </button>
-      <input
-        type="text"
-        onChange={ handleChange }
-        value={ productQnt }
-        data-testid={ `customer_products__input-card-quantity-${index}` }
-      />
-      <button
-        type="button"
-        onClick={ handleRemoveClick }
-        data-testid={ `customer_products__button-card-rm-item-${index}` }
-      >
-        -
-      </button>
+      <div className="count-products">
+        <button
+          type="button"
+          onClick={ handleAddClick }
+          data-testid={ `customer_products__button-card-add-item-${index}` }
+        >
+          +
+        </button>
+        <input
+          type="text"
+          onChange={ handleChange }
+          value={ productQnt }
+          data-testid={ `customer_products__input-card-quantity-${index}` }
+        />
+        <button
+          type="button"
+          onClick={ handleRemoveClick }
+          data-testid={ `customer_products__button-card-rm-item-${index}` }
+        >
+          -
+        </button>
+      </div>
     </section>
   );
 }

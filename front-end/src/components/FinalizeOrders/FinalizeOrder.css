@@ -23,5 +23,11 @@
 .container-finalize-order-title {
   display: flex;
   justify-content: space-between;
+  text-align: center;
   width: 80%;
 }
+
+span {
+  width: 100px;
+}
+
