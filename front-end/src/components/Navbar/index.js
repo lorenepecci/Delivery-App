@@ -8,25 +8,39 @@ export default function Navbar({ name }) {
   const history = useHistory();
   const { setUserData } = useContext(Context);
 
+  const getUser = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user.role;
+  };
+
+  const redirect = () => {
+    const role = getUser();
+    if (role === 'administrator') return;
+    history.push('/customer/products');
+  };
+
   return (
     <header>
       <nav className="navbar">
         <button
           className="navbar-products"
           type="button"
-          onClick={ () => history.push('/customer/products') }
+          onClick={ redirect }
           data-testid="customer_products__element-navbar-link-products"
         >
-          PRODUTOS
+          { getUser() === 'administrator' ? 'GERENCIAR USUÁRIOS' : 'PRODUTOS' }
         </button>
-        <button
-          className="navbar-my-products"
-          type="button"
-          onClick={ () => history.push('/customer/orders') }
-          data-testid="customer_products__element-navbar-link-orders"
-        >
-          MEUS PEDIDOS
-        </button>
+        { getUser() !== 'administrator'
+          && (
+            <button
+              className="navbar-my-products"
+              type="button"
+              onClick={ () => history.push('/customer/orders') }
+              data-testid="customer_products__element-navbar-link-orders"
+            >
+              MEUS PEDIDOS
+            </button>
+          )}
         <div className="navbar-name">
           <p data-testid="customer_products__element-navbar-user-full-name">
             { name }
