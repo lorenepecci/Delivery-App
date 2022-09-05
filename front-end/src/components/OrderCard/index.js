@@ -29,25 +29,25 @@ export default function OrderCard({ index, order }) {
         data-testid={ `${prefix}element-order-table-item-number-${index}` }
       >
         { index + 1 }
-      </span>
-      <span data-testid={ `${prefix}element-order-table-name-${index}` }>
+      </td>
+      <td data-testid={ `${prefix}element-order-table-name-${index}` }>
         { order.name }
-      </span>
-      <span data-testid={ `${prefix}element-order-table-quantity-${index}` }>
+      </td>
+      <td data-testid={ `${prefix}element-order-table-quantity-${index}` }>
         { order.quantity }
-      </span>
-      <span data-testid={ `${prefix}element-order-table-unit-price-${index}` }>
+      </td>
+      <td data-testid={ `${prefix}element-order-table-unit-price-${index}` }>
         {` ${Number(order.price).toLocaleString('pt-BR', {
           currency: 'BRL',
           style: 'currency',
         })} `}
-      </span>
-      <span data-testid={ `${prefix}element-order-table-sub-total-${index}` }>
+      </td>
+      <td data-testid={ `${prefix}element-order-table-sub-total-${index}` }>
         {` ${Number((order.quantity * order.price).toFixed(2)).toLocaleString('pt-BR', {
           currency: 'BRL',
           style: 'currency',
         })} `}
-      </span>
+      </td>
       {pathname.includes('checkout') ? (
         <button
           type="button"
@@ -56,7 +56,7 @@ export default function OrderCard({ index, order }) {
         >
           Remover
         </button>) : null}
-    </div>
+    </tr>
   );
 }
 

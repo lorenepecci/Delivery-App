@@ -1,6 +1,6 @@
 import React from 'react';
 import AddressDelivery from '../../components/AddressDelivery';
-import FinalizeOrder from '../../components/FinalizeOrders';
+import FinalizeOrders from '../../components/FinalizeOrders';
 import Navbar from '../../components/Navbar';
 import './Checkout.css';
 
@@ -9,7 +9,7 @@ export default function Checkout() {
     <div className="container-checkout">
       <Navbar />
       <div className="addressDelivery">
-        <FinalizeOrder />
+        <FinalizeOrders />
         <AddressDelivery />
       </div>
     </div>

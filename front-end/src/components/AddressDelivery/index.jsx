@@ -38,10 +38,8 @@ export default function AddressDelivery() {
   }, []);
 
   useEffect(() => {
-    const { address,
-      number } = userAddress;
-    if (address.length && number > 0
-    && Number(totalPrice) > 0) {
+    const { address, number } = userAddress;
+    if (address.length && number > 0 && Number(totalPrice) > 0) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
@@ -55,7 +53,10 @@ export default function AddressDelivery() {
         deliveryAddress: userAddress.address,
         deliveryNumber: parseInt(userAddress.number, 10),
         sellerId: userAddress.seller,
-        products: buyList.map((item) => ({ id: item.id, quantity: item.quantity })),
+        products: buyList.map((item) => ({
+          id: item.id,
+          quantity: item.quantity,
+        })),
       });
       console.log(response);
       history.push(`/customer/orders/${response.data.saleId}`);
@@ -77,9 +78,12 @@ export default function AddressDelivery() {
               id="seller"
               onChange={ (e) => handleChange(e) }
             >
-              { listSellers.length && listSellers.map((item, index) => (
-                <option key={ index } value={ item.id }>{item.name}</option>
-              ))}
+              {listSellers.length
+                && listSellers.map((item, index) => (
+                  <option key={ index } value={ item.id }>
+                    {item.name}
+                  </option>
+                ))}
             </select>
           </label>
           <label htmlFor="address" className="address">
@@ -107,7 +111,9 @@ export default function AddressDelivery() {
         </form>
         <div className="container-button">
           <button
-            className={ `btn-finalizar ${isDisabled ? 'disabled' : 'notDisabled'}` }
+            className={ `btn-finalizar ${
+              isDisabled ? 'disabled' : 'notDisabled'
+            }` }
             data-testid="customer_checkout__button-submit-order"
             type="button"
             onClick={ onHandleSubmit }

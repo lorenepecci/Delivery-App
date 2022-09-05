@@ -6,7 +6,9 @@ import './FinalizeOrder.css';
 
 export default function FinalizeOrders() {
   const { buyList, totalPrice } = useContext(Context);
-  const { location: { pathname } } = useHistory();
+  const {
+    location: { pathname },
+  } = useHistory();
   let prefix;
 
   if (pathname.includes('checkout')) prefix = 'customer_checkout__';
@@ -16,9 +18,7 @@ export default function FinalizeOrders() {
     <div>
       <h2>Finalizar Pedido</h2>
       <div className="container-finalize-order">
-        <div
-          className="container-finalize-order-title"
-        >
+        <div className="container-finalize-order-title">
           <span>Item</span>
           <span>Descrição</span>
           <span>Quantidade</span>
@@ -26,15 +26,9 @@ export default function FinalizeOrders() {
           <span>Sub-total</span>
           {pathname.includes('checkout') ? <span>Remover Item</span> : null}
         </div>
-        {
-          buyList.map((order, i) => (
-            <OrderCard
-              key={ i }
-              index={ i }
-              order={ order }
-            />
-          ))
-        }
+        {buyList.map((order, i) => (
+          <OrderCard key={ i } index={ i } order={ order } />
+        ))}
         <div className="container-button-total">
           <button
             className="btn-total-value"

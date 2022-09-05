@@ -11,13 +11,13 @@ export default function OrderCardCustomer({ order }) {
   return (
     <div
       className="order-card-customer-container-button"
-      onClick={() => history.push(`orders/${order.id}`)}
-      onKeyPress={() => history.push(`orders/${order.id}`)}
+      onClick={ () => history.push(`orders/${order.id}`) }
+      onKeyPress={ () => history.push(`orders/${order.id}`) }
       role="button"
       tabIndex="0"
     >
       <div
-        data-testid={`customer_orders__element-order-id-${order.id}`}
+        data-testid={ `customer_orders__element-order-id-${order.id}` }
         className="order-card-customer-pedido"
       >
         <p>Pedido</p>
@@ -26,11 +26,11 @@ export default function OrderCardCustomer({ order }) {
 
       <div className="order-card-customer-status">
         <p
-          data-testid={`customer_orders__element-delivery-status-${order.id}`}
-          className={`p-status ${
+          data-testid={ `customer_orders__element-delivery-status-${order.id}` }
+          className={ `p-status ${
             order.status === 'Preparando' ? 'preparando' : null
           }
-          ${order.status === 'Entregue' ? 'entregue' : null}`}
+          ${order.status === 'Entregue' ? 'entregue' : null}` }
         >
           {order.status}
         </p>
@@ -38,13 +38,13 @@ export default function OrderCardCustomer({ order }) {
 
       <div className="order-card-customer-dataTotal">
         <div
-          data-testid={`customer_orders__element-order-date-${order.id}`}
+          data-testid={ `customer_orders__element-order-date-${order.id}` }
           className="order-card-customer-data"
         >
           {dataAtualFormatada(order.saleDate)}
         </div>
         <div
-          data-testid={`customer_orders__element-card-price-${order.id}`}
+          data-testid={ `customer_orders__element-card-price-${order.id}` }
           className="order-card-customer-total"
         >
           {` R$ ${Number(order.totalPrice).toLocaleString('pt-BR', {
@@ -55,7 +55,7 @@ export default function OrderCardCustomer({ order }) {
       </div>
 
       <div
-        data-testid={`customer_orders__element-card-address-${order.id}`}
+        data-testid={ `customer_orders__element-card-address-${order.id}` }
         className="order-card-address"
       >
         {order.deliveryAddress}

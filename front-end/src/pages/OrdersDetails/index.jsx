@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import FinalizeOrder from '../../components/FinalizeOrders';
+import FinalizeOrders from '../../components/FinalizeOrders';
 import Navbar from '../../components/Navbar';
 import { getOrdersCustomer, updateOrdersCustomer } from '../../services/api';
 import './OrdersDetails.css';
@@ -65,7 +65,7 @@ export default function OrdersDetails() {
         </button>
       </div>
       <div className="addressDelivery">
-        <FinalizeOrder />
+        <FinalizeOrders />
       </div>
     </div>
   );
