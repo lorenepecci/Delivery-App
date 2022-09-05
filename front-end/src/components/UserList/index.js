@@ -1,12 +1,13 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import './UserList.css';
 
 function UserList({ handleDeleteClick, users }) {
   return (
-    <div>
-      <table>
+    <div className="user-list-component">
+      <table className="table-user-list">
         <thead>
-          <tr>
+          <tr className="title-table-user-list">
             <th>Item</th>
             <th>Nome</th>
             <th>E-mail</th>
@@ -14,7 +15,7 @@ function UserList({ handleDeleteClick, users }) {
             <th>Excluir</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="body-user-list">
           { users && users.map((user, index) => {
             const { id, email, role, name } = user;
             if (user.role === 'administrator') return;
@@ -55,6 +56,7 @@ function UserList({ handleDeleteClick, users }) {
                   <button
                     type="button"
                     onClick={ () => handleDeleteClick(id) }
+                    className="button-excluir-item"
                   >
                     Excluir
                   </button>

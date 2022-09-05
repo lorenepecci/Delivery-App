@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import './RegisterUser.css';
 
 export default function RegisterUser({ handleRegisterClick, error }) {
@@ -73,7 +73,7 @@ export default function RegisterUser({ handleRegisterClick, error }) {
             />
           </label>
 
-          <p>Tipo</p>
+          <p className="tipo">Tipo</p>
           <select
             className="role"
             data-testid="admin_manage__select-role"
