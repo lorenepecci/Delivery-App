@@ -11,7 +11,7 @@ function ProductCard({ product, index }) {
 
   const updateTotal = (cart) => {
     const total = cart.reduce((acc, cur) => {
-      const result = acc + (cur.quantity * Number(cur.price));
+      const result = acc + cur.quantity * Number(cur.price);
       return result;
     }, 0);
     setTotalPrice(total.toFixed(2));
@@ -87,14 +87,11 @@ function ProductCard({ product, index }) {
 
   return (
     <section className="product-card">
-      <div
-        className="product-card-price"
-        data-testid={ `customer_products__element-card-price-${index}` }
-      >
-        {`R$ ${Number(product.price).toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}`}
+      <div data-testid={ `customer_products__element-card-price-${index}` }>
+        {Number(product.price).toLocaleString('pt-BR', {
+          currency: 'BRL',
+          style: 'currency',
+        })}
       </div>
       <img
         className="product-card-img"
@@ -106,7 +103,7 @@ function ProductCard({ product, index }) {
         className="product-card-name"
         data-testid={ `customer_products__element-card-title-${index}` }
       >
-        { product.name }
+        {product.name}
       </div>
       <div className="count-products">
         <button

@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Context from '../../context/Context';
 import './OrderCard.css';
 
 export default function OrderCard({ index, order }) {
   const { setBuyList, buyList, setTotalPrice } = useContext(Context);
+  const { location: { pathname } } = useHistory();
   const removeItem = () => {
     const newList = buyList.filter((prod) => prod.id !== order.id);
     setBuyList(newList);
@@ -15,41 +17,45 @@ export default function OrderCard({ index, order }) {
     setTotalPrice(newSoma.toFixed(2));
   };
 
+  let prefix;
+
+  if (pathname.includes('checkout')) prefix = 'customer_checkout__';
+  else if (pathname.includes('customer/orders')) prefix = 'customer_order_details__';
+  else if (pathname.includes('seller/orders/')) prefix = 'seller_order_details__';
+
   return (
     <tr className="order-card-container">
       <td
-        data-testid={ `customer_checkout__element-order-table-item-number-${index}` }
+        data-testid={ `${prefix}element-order-table-item-number-${index}` }
       >
         { index + 1 }
       </td>
-      <td data-testid={ `customer_checkout__element-order-table-name-${index}` }>
+      <td data-testid={ `${prefix}element-order-table-name-${index}` }>
         { order.name }
       </td>
-      <td data-testid={ `customer_checkout__element-order-table-quantity-${index}` }>
+      <td data-testid={ `${prefix}element-order-table-quantity-${index}` }>
         { order.quantity }
       </td>
-      <td data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }>
+      <td data-testid={ `${prefix}element-order-table-unit-price-${index}` }>
         {` ${Number(order.price).toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
+          currency: 'BRL',
+          style: 'currency',
         })} `}
       </td>
-      <td data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }>
+      <td data-testid={ `${prefix}element-order-table-sub-total-${index}` }>
         {` ${Number((order.quantity * order.price).toFixed(2)).toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
+          currency: 'BRL',
+          style: 'currency',
         })} `}
       </td>
-      <td>
+      {pathname.includes('checkout') ? (
         <button
-          className="button-remove-item"
           type="button"
           onClick={ removeItem }
-          data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+          data-testid={ `${prefix}element-order-table-remove-${index}` }
         >
           Remover
-        </button>
-      </td>
+        </button>) : null}
     </tr>
   );
 }

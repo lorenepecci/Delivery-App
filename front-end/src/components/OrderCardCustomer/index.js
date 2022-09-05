@@ -1,17 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import dataAtualFormatada from '../../helper/convertData';
 import './OrderCardCustomer.css';
 
 export default function OrderCardCustomer({ order }) {
   const history = useHistory();
-
-  const dataAtualFormatada = (dateString) => {
-    const data = new Date(dateString);
-    const dia = data.getDate().toString().padStart(2, '0');
-    const mes = (data.getMonth() + 1).toString().padStart(2, '0');
-    const ano = data.getFullYear(); return `${dia}/${mes}/${ano}`;
-  };
+  const size = 4;
 
   return (
     <div
@@ -21,19 +16,20 @@ export default function OrderCardCustomer({ order }) {
       role="button"
       tabIndex="0"
     >
-      <div className="order-card-customer-middle">
-        <div
-          data-testid={ `customer_orders__element-order-id-${order.id}` }
-          className="order-card-customer-pedido"
-        >
-          <p>Pedido</p>
-          {`000${order.id}`}
-        </div>
+      <div
+        data-testid={ `customer_orders__element-order-id-${order.id}` }
+        className="order-card-customer-pedido"
+      >
+        <p>Pedido</p>
+        {`${order.id}`.padStart(size, '0')}
       </div>
+
       <div className="order-card-customer-status">
         <p
           data-testid={ `customer_orders__element-delivery-status-${order.id}` }
-          className={ `p-status ${order.status === 'Preparando' ? 'preparando' : null}
+          className={ `p-status ${
+            order.status === 'Preparando' ? 'preparando' : null
+          }
           ${order.status === 'Entregue' ? 'entregue' : null}` }
         >
           {order.status}
@@ -45,7 +41,7 @@ export default function OrderCardCustomer({ order }) {
           data-testid={ `customer_orders__element-order-date-${order.id}` }
           className="order-card-customer-data"
         >
-          {dataAtualFormatada(order.saleDate) }
+          {dataAtualFormatada(order.saleDate)}
         </div>
         <div
           data-testid={ `customer_orders__element-card-price-${order.id}` }
@@ -56,7 +52,6 @@ export default function OrderCardCustomer({ order }) {
             maximumFractionDigits: 2,
           })}`}
         </div>
-
       </div>
 
       <div
@@ -65,7 +60,6 @@ export default function OrderCardCustomer({ order }) {
       >
         {order.deliveryAddress}
       </div>
-
     </div>
   );
 }

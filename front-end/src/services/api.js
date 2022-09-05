@@ -47,7 +47,7 @@ const getUsersSellers = async () => {
 };
 
 const postSalesCheckout = async (obj) => {
-  const user = JSON.parse(localStorage.getItem(('user')));
+  const user = JSON.parse(localStorage.getItem('user'));
   const instanceToken = axios.create({
     baseURL: URL,
     headers: { authorization: user.token },
@@ -60,14 +60,14 @@ const postSalesCheckout = async (obj) => {
   }
 };
 
-const getOrdersCustomer = async () => {
-  const user = JSON.parse(localStorage.getItem(('user')));
+const getOrdersCustomer = async (id) => {
+  const user = JSON.parse(localStorage.getItem('user'));
   const instanceToken = axios.create({
     baseURL: URL,
     headers: { authorization: user.token },
   });
   try {
-    const r = await instanceToken.get('/sales/customer/orders');
+    const r = await instanceToken.get(`/sales/customer/orders/${id || ''}`);
     return r.data;
   } catch (error) {
     console.log(error, 'erroapi');
@@ -75,7 +75,7 @@ const getOrdersCustomer = async () => {
 };
 
 const getOrdersSeller = async () => {
-  const user = JSON.parse(localStorage.getItem(('user')));
+  const user = JSON.parse(localStorage.getItem('user'));
   const instanceToken = axios.create({
     baseURL: URL,
     headers: { authorization: user.token },
@@ -92,21 +92,43 @@ const postRegisterUserByAdmin = async (body) => {
   const { name, email, password, role } = body;
   try {
     console.log(body);
-    const user = JSON.parse(localStorage.getItem(('user')));
+    const user = JSON.parse(localStorage.getItem('user'));
     const instanceToken = axios.create({
       baseURL: URL,
       headers: { authorization: user.token },
     });
-    const r = await instanceToken.post('/admin/manage', { name, email, password, role });
+    const r = await instanceToken.post('/admin/manage', {
+      name,
+      email,
+      password,
+      role,
+    });
     return r;
   } catch (error) {
     console.log(error, 'erroapi');
   }
 };
 
+const updateOrdersCustomer = async (payload) => {
+  const { id, status } = payload;
+  try {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const instanceToken = axios.create({
+      baseURL: URL,
+      headers: { authorization: user.token },
+    });
+    const r = await instanceToken.patch(`/sales/customer/orders/${id}`, {
+      status,
+    });
+    return r;
+  } catch (error) {
+    console.error(error, 'erroapi');
+  }
+};
+
 const getAllUsers = async () => {
   try {
-    const user = JSON.parse(localStorage.getItem(('user')));
+    const user = JSON.parse(localStorage.getItem('user'));
     const instanceToken = axios.create({
       baseURL: URL,
       headers: { authorization: user.token },
@@ -120,7 +142,7 @@ const getAllUsers = async () => {
 
 const deleteUser = async (id) => {
   try {
-    const user = JSON.parse(localStorage.getItem(('user')));
+    const user = JSON.parse(localStorage.getItem('user'));
     const instanceToken = axios.create({
       baseURL: URL,
       headers: { authorization: user.token },
@@ -138,6 +160,7 @@ export {
   getUsersSellers,
   postSalesCheckout,
   getOrdersCustomer,
+  updateOrdersCustomer,
   getOrdersSeller,
   postRegisterUserByAdmin,
   getAllUsers,
