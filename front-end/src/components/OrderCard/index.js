@@ -24,8 +24,8 @@ export default function OrderCard({ index, order }) {
   else if (pathname.includes('seller/orders/')) prefix = 'seller_order_details__';
 
   return (
-    <div className="order-card-container">
-      <span
+    <tr className="order-card-container">
+      <td
         data-testid={ `${prefix}element-order-table-item-number-${index}` }
       >
         { index + 1 }

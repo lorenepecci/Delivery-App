@@ -9,14 +9,15 @@ export default function OrderCardCustomer({ order }) {
   const size = 4;
 
   return (
-    <button
+    <div
       className="order-card-customer-container-button"
-      type="button"
-      onClick={ () => history.push(`orders/${order.id}`) }
+      onClick={() => history.push(`orders/${order.id}`)}
+      onKeyPress={() => history.push(`orders/${order.id}`)}
+      role="button"
+      tabIndex="0"
     >
-
       <div
-        data-testid={ `customer_orders__element-order-id-${order.id}` }
+        data-testid={`customer_orders__element-order-id-${order.id}`}
         className="order-card-customer-pedido"
       >
         <p>Pedido</p>
@@ -25,39 +26,41 @@ export default function OrderCardCustomer({ order }) {
 
       <div className="order-card-customer-status">
         <p
-          data-testid={ `customer_orders__element-delivery-status-${order.id}` }
-          className="p-status"
+          data-testid={`customer_orders__element-delivery-status-${order.id}`}
+          className={`p-status ${
+            order.status === 'Preparando' ? 'preparando' : null
+          }
+          ${order.status === 'Entregue' ? 'entregue' : null}`}
         >
           {order.status}
         </p>
       </div>
+
       <div className="order-card-customer-dataTotal">
         <div
-          data-testid={ `customer_orders__element-order-date-${order.id}` }
+          data-testid={`customer_orders__element-order-date-${order.id}`}
           className="order-card-customer-data"
         >
-          {dataAtualFormatada(order.saleDate) }
+          {dataAtualFormatada(order.saleDate)}
         </div>
         <div
-          data-testid={ `customer_orders__element-card-price-${order.id}` }
+          data-testid={`customer_orders__element-card-price-${order.id}`}
           className="order-card-customer-total"
         >
-          {Number(order.totalPrice).toLocaleString('pt-BR', {
+          {` R$ ${Number(order.totalPrice).toLocaleString('pt-BR', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-          })}
+          })}`}
         </div>
-
       </div>
 
       <div
-        data-testid={ `customer_orders__element-card-address-${order.id}` }
+        data-testid={`customer_orders__element-card-address-${order.id}`}
         className="order-card-address"
       >
         {order.deliveryAddress}
       </div>
-
-    </button>
+    </div>
   );
 }
 
