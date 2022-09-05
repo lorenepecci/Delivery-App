@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import RegisterUser from '../../components/RegisterUser';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../../components/Navbar';
+import RegisterUser from '../../components/RegisterUser';
+import UserList from '../../components/UserList';
 import { deleteUser, getAllUsers, postRegisterUserByAdmin } from '../../services/api';
 import './Admin.css';
-import UserList from '../../components/UserList';
 
 export default function Admin() {
   const [users, setUsers] = useState(null);
@@ -36,8 +36,8 @@ export default function Admin() {
 
   return (
     <div className="container-admin">
+      <NavBar />
       <div className="addressDelivery">
-        <NavBar />
         <RegisterUser
           handleRegisterClick={ handleRegisterClick }
           error={ error }

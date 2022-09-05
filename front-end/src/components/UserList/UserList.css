@@ -1,0 +1,53 @@
+.user-list-component {
+  padding-top: 30px;
+}
+
+.table-user-list {
+  border: rgb(6, 131, 93) solid 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.body-user-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.button-excluir-item {
+  background-color: rgb(6, 131, 93);
+  border: 1px solid black;
+  border-radius: 5px;
+  color: white;
+}
+
+.thead {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+th {
+  margin: auto;
+}
+
+.title-table-user-list {
+  border-bottom: rgb(6, 131, 93) solid 2px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  text-align: center;
+  width: 100%;
+}
+
+td {
+  border: rgb(6, 131, 93) solid 1px;
+  padding: 10px 0;
+  width: 200px;
+}
