@@ -25,7 +25,6 @@ export default function Products() {
   useEffect(() => {
     const getProducts = async () => {
       const result = await getAllProducts();
-      console.log('products', result.data.products);
       setProducts(result.data.products);
     };
     getProducts();
@@ -63,19 +62,22 @@ export default function Products() {
   // }];
 
   return (
-    <div className="products-container">
+    <div className="products-page">
       <Navbar name={ user.name } />
-      {
-        products.length > 0
-          ? products.filter((_el, i) => i < MAX_LENGTH).map((product, i) => (
-            <ProductCard
-              key={ i }
-              product={ product }
-              index={ i + 1 }
-            />
-          ))
-          : null
-      }
+      <div className="products-container">
+        {
+          products.length > 0
+            ? products.filter((_el, i) => i < MAX_LENGTH).map((product, i) => (
+              <ProductCard
+                key={ i }
+                product={ product }
+                index={ i + 1 }
+              />
+            ))
+            : null
+        }
+
+      </div>
       <button
         type="button"
         className="button-products"
