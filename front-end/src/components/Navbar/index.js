@@ -31,14 +31,16 @@ export default function Navbar({ name }) {
           { getUser() === 'administrator' ? 'GERENCIAR USUÁRIOS' : 'PRODUTOS' }
         </button>
         { getUser() !== 'administrator'
-        && (<button
-          className="navbar-my-products"
-          type="button"
-          onClick={ () => history.push('/customer/orders') }
-          data-testid="customer_products__element-navbar-link-orders"
-        >
-          MEUS PEDIDOS
-          </button>) }
+          && (
+            <button
+              className="navbar-my-products"
+              type="button"
+              onClick={ () => history.push('/customer/orders') }
+              data-testid="customer_products__element-navbar-link-orders"
+            >
+              MEUS PEDIDOS
+            </button>
+          )}
         <div className="navbar-name">
           <p data-testid="customer_products__element-navbar-user-full-name">
             { name }
