@@ -18,7 +18,6 @@
 
 - `git clone git@github.com:lorenepecci/Delivery-App.git`
 - Entre na pasta do repositório que você acabou de clonar
-- Entre na pasta ProjectOnlineStore
 
 2. Crie uma pasta .env com suas variáveis de ambiente (MYSQL)
 
